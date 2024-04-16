@@ -16,7 +16,7 @@ SpaceTest >> addClickEvent [
 	background: Color random; 
 	size: 20@20;
 	geometry: BlCircle new;
-	position: 480 atRandom @ 480 atRandom 
+	position: evt position 
 	)].
 ]
 
