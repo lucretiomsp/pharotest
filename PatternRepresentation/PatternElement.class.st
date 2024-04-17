@@ -13,6 +13,22 @@ PatternElement >> addBarToThePattern [
 	
 ]
 
+{ #category : #adding }
+PatternElement >> addBarToThePattern: nbBars [
+	| bar changingX |
+	
+	changingX := 2.5.
+   nbBars > 0 ifTrue: 
+	[ 1 to: nbBars do: [ :i | 	bar:= Bar new.
+			bar transformDo: [  :t | 
+			 t translateBy: changingX@0. ]. 
+		changingX := changingX + 35.
+		self addChild: bar ].].
+	
+	
+	
+]
+
 { #category : #'visual properties' }
 PatternElement >> backgroundPaint [ 
 	
@@ -32,5 +48,5 @@ PatternElement >> initialize [
 { #category : #'visual properties' }
 PatternElement >> patternExtent [
 
-	^ 526@60
+	^ 561@60
 ]
