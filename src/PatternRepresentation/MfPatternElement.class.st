@@ -2,6 +2,8 @@ Class {
 	#name : #MfPatternElement,
 	#superclass : #BlElement,
 	#classVars : [
+		'max',
+		'min',
 		'pattern'
 	],
 	#category : #PatternRepresentation
@@ -9,19 +11,16 @@ Class {
 
 { #category : #adding }
 MfPatternElement >> addBarsToThePattern: nbBars [
+
 	| bar changingX |
-	
 	changingX := 2.5.
-   nbBars > 0 ifTrue: 
-	[ 1 to: nbBars do: [ :i | 	bar:= MfBar new.
-			bar transformDo: [  :t | 
-			 t translateBy: changingX@0. ]. 
-		changingX := changingX + 35.
-		self addChild: bar ].].
-	self size: (35 * nbBars )@60.
-	
-	
-	
+	(nbBars between: self min and: self max) ifTrue: [
+		1 to: nbBars do: [ :i |
+			bar := MfBar new.
+			bar transformDo: [ :t | t translateBy: changingX @ 0 ].
+			changingX := changingX + 35.
+			self addChild: bar ] ].
+	self size: 35 * nbBars @ 60
 ]
 
 { #category : #adding }
@@ -49,6 +48,30 @@ MfPatternElement >> initialize [
 	self geometry: BlRectangle new.
 	self layout: BlFrameLayout new.
 	
+]
+
+{ #category : #accessing }
+MfPatternElement >> max [ 
+	
+	^max.
+]
+
+{ #category : #accessing }
+MfPatternElement >> max: aMax [
+
+	max:=aMax.
+]
+
+{ #category : #accessing }
+MfPatternElement >> min [ 
+
+	^min.
+]
+
+{ #category : #accessing }
+MfPatternElement >> min: aMin [
+
+	min:=aMin.
 ]
 
 { #category : #accessing }
