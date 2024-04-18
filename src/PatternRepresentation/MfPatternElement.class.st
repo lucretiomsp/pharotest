@@ -4,6 +4,7 @@ Class {
 	#classVars : [
 		'max',
 		'min',
+		'nbbars',
 		'pattern'
 	],
 	#category : #PatternRepresentation
@@ -13,6 +14,7 @@ Class {
 MfPatternElement >> addBarsToThePattern: nbBars [
 
 	| bar changingX |
+	nbBars= nbbars .
 	changingX := 2.5.
 	(nbBars between: self min and: self max) ifTrue: [
 		1 to: nbBars do: [ :i |
@@ -72,6 +74,17 @@ MfPatternElement >> min [
 MfPatternElement >> min: aMin [
 
 	min:=aMin.
+]
+
+{ #category : #accessing }
+MfPatternElement >> nbbars [		
+	^nbbars.
+]
+
+{ #category : #accessing }
+MfPatternElement >> nbbars: someNbBars [
+
+nbbars:= someNbBars .
 ]
 
 { #category : #accessing }
