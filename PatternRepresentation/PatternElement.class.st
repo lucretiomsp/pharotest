@@ -8,13 +8,7 @@ Class {
 }
 
 { #category : #adding }
-PatternElement >> addBarToThePattern [ 
-
-	
-]
-
-{ #category : #adding }
-PatternElement >> addBarToThePattern: nbBars [
+PatternElement >> addBarsToThePattern: nbBars [
 	| bar changingX |
 	
 	changingX := 2.5.
@@ -24,6 +18,7 @@ PatternElement >> addBarToThePattern: nbBars [
 			 t translateBy: changingX@0. ]. 
 		changingX := changingX + 35.
 		self addChild: bar ].].
+	self size: (35 * nbBars )@60.
 	
 	
 	
@@ -48,5 +43,5 @@ PatternElement >> initialize [
 { #category : #'visual properties' }
 PatternElement >> patternExtent [
 
-	^ 561@60
+	^ 35@60
 ]
