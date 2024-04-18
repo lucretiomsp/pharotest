@@ -24,6 +24,16 @@ PatternElement >> addBarsToThePattern: nbBars [
 	
 ]
 
+{ #category : #adding }
+PatternElement >> addDrumInBar [
+	self childrenDo: [ :child |
+		child addEventHandlerOn: BlMouseDownEvent   do: [ :ee | 
+			child background paint color == Color white
+			ifTrue: [ child background: Color black ]
+			ifFalse: [ child background: Color white  ]
+			 ].].
+]
+
 { #category : #'visual properties' }
 PatternElement >> backgroundPaint [ 
 	
@@ -43,5 +53,5 @@ PatternElement >> initialize [
 { #category : #'visual properties' }
 PatternElement >> patternExtent [
 
-	^ 35@60
+	^ 36@60
 ]
