@@ -14,7 +14,6 @@ Class {
 MfPatternElement >> addBarsToThePattern: nbBars [
 
 	| bar changingX |
-	nbBars= nbbars .
 	changingX := 2.5.
 	(nbBars between: self min and: self max) ifTrue: [
 		1 to: nbBars do: [ :i |
@@ -30,7 +29,7 @@ MfPatternElement >> addDrumInBar [
 	self childrenDo: [ :child |
 		child addEventHandlerOn: BlMouseDownEvent   do: [ :ee | 
 			child background paint color == Color white
-			ifTrue: [ child background: Color black. child assignDrum   .]
+			ifTrue: [ child background: Color black. child assignDrum.]
 			ifFalse: [ child background: Color white. child removeDrum. ]
 			 ].].
 ]

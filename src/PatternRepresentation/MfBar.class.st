@@ -7,7 +7,7 @@ Class {
 	#category : #PatternRepresentation
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #action }
 MfBar >> assignDrum [
 drum := true.
 ]
@@ -22,6 +22,12 @@ MfBar >> backgroundPaint [
 MfBar >> barExtent [
 
 	^30@52.
+]
+
+{ #category : #accessing }
+MfBar >> drum [ 
+
+^drum.
 ]
 
 { #category : #initialization }
