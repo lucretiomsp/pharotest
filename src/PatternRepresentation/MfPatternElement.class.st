@@ -29,8 +29,8 @@ MfPatternElement >> addDrumInBar [
 	self childrenDo: [ :child |
 		child addEventHandlerOn: BlMouseDownEvent   do: [ :ee | 
 			child background paint color == Color white
-			ifTrue: [ child background: Color black ]
-			ifFalse: [ child background: Color white  ]
+			ifTrue: [ child background: Color black. child assignDrum   .]
+			ifFalse: [ child background: Color white. child removeDrum. ]
 			 ].].
 ]
 

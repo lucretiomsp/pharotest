@@ -1,11 +1,16 @@
 Class {
 	#name : #MfBar,
 	#superclass : #BlElement,
-	#instVars : [
-		'bar'
+	#classVars : [
+		'drum'
 	],
 	#category : #PatternRepresentation
 }
+
+{ #category : #'as yet unclassified' }
+MfBar >> assignDrum [
+drum := true.
+]
 
 { #category : #'visual properties' }
 MfBar >> backgroundPaint [ 
@@ -23,8 +28,21 @@ MfBar >> barExtent [
 MfBar >> initialize [ 
 
 	super initialize.
+	drum := false.
 	self size: self barExtent.
 	self background: self backgroundPaint .
 	self constraintsDo: [ :e |
         e frame vertical alignCenter. ].
+]
+
+{ #category : #testing }
+MfBar >> isDrumAssigned [
+
+	^drum.
+]
+
+{ #category : #removing }
+MfBar >> removeDrum [
+
+drum := false.
 ]
