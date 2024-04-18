@@ -1,7 +1,7 @@
 Class {
 	#name : #MfPatternElement,
 	#superclass : #BlElement,
-	#instVars : [
+	#classVars : [
 		'pattern'
 	],
 	#category : #PatternRepresentation
@@ -48,6 +48,19 @@ MfPatternElement >> initialize [
 	self background: self backgroundPaint .
 	self geometry: BlRectangle new.
 	self layout: BlFrameLayout new.
+	
+]
+
+{ #category : #accessing }
+MfPatternElement >> pattern [
+
+^pattern.
+]
+
+{ #category : #accessing }
+MfPatternElement >> pattern: aPattern [
+
+pattern:= aPattern.
 ]
 
 { #category : #'visual properties' }
