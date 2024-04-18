@@ -1,5 +1,5 @@
 Class {
-	#name : #Pattern,
+	#name : #MfPattern,
 	#superclass : #Object,
 	#instVars : [
 		'name',

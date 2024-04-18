@@ -1,5 +1,5 @@
 Class {
-	#name : #PatternElement,
+	#name : #MfPatternElement,
 	#superclass : #BlElement,
 	#instVars : [
 		'pattern'
@@ -8,12 +8,12 @@ Class {
 }
 
 { #category : #adding }
-PatternElement >> addBarsToThePattern: nbBars [
+MfPatternElement >> addBarsToThePattern: nbBars [
 	| bar changingX |
 	
 	changingX := 2.5.
    nbBars > 0 ifTrue: 
-	[ 1 to: nbBars do: [ :i | 	bar:= Bar new.
+	[ 1 to: nbBars do: [ :i | 	bar:= MfBar new.
 			bar transformDo: [  :t | 
 			 t translateBy: changingX@0. ]. 
 		changingX := changingX + 35.
@@ -25,7 +25,7 @@ PatternElement >> addBarsToThePattern: nbBars [
 ]
 
 { #category : #adding }
-PatternElement >> addDrumInBar [
+MfPatternElement >> addDrumInBar [
 	self childrenDo: [ :child |
 		child addEventHandlerOn: BlMouseDownEvent   do: [ :ee | 
 			child background paint color == Color white
@@ -35,13 +35,13 @@ PatternElement >> addDrumInBar [
 ]
 
 { #category : #'visual properties' }
-PatternElement >> backgroundPaint [ 
+MfPatternElement >> backgroundPaint [ 
 	
 	^ Color red
 ]
 
 { #category : #initialization }
-PatternElement >> initialize [ 
+MfPatternElement >> initialize [ 
 
 	super initialize.
 	self size: self patternExtent .
@@ -51,7 +51,7 @@ PatternElement >> initialize [
 ]
 
 { #category : #'visual properties' }
-PatternElement >> patternExtent [
+MfPatternElement >> patternExtent [
 
 	^ 36@60
 ]

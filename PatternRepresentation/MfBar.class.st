@@ -1,5 +1,5 @@
 Class {
-	#name : #Bar,
+	#name : #MfBar,
 	#superclass : #BlElement,
 	#instVars : [
 		'bar'
@@ -8,19 +8,19 @@ Class {
 }
 
 { #category : #'visual properties' }
-Bar >> backgroundPaint [ 
+MfBar >> backgroundPaint [ 
 
 	^ Color white.
 ]
 
 { #category : #'visual properties' }
-Bar >> barExtent [
+MfBar >> barExtent [
 
 	^30@52.
 ]
 
 { #category : #initialization }
-Bar >> initialize [ 
+MfBar >> initialize [ 
 
 	super initialize.
 	self size: self barExtent.
