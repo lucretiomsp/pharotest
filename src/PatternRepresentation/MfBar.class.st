@@ -41,12 +41,6 @@ MfBar >> initialize [
         e frame vertical alignCenter. ].
 ]
 
-{ #category : #testing }
-MfBar >> isDrumAssigned [
-
-	^drum.
-]
-
 { #category : #removing }
 MfBar >> removeDrum [
 

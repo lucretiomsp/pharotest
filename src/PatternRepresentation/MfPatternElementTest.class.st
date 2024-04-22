@@ -4,7 +4,7 @@ Class {
 	#category : #PatternRepresentation
 }
 
-{ #category : #'basic tests' }
+{ #category : #'test-init' }
 MfPatternElementTest >> testBarsAreInitializedCorrectlyInPattern [
 
 | pattern patternElem |

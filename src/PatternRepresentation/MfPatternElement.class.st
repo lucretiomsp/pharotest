@@ -86,6 +86,24 @@ MfPatternElement >> nbbars: someNbBars [
 nbbars:= someNbBars .
 ]
 
+{ #category : #'as yet unclassified' }
+MfPatternElement >> openPattern: aPattern [
+	| space |
+	space := BlSpace new.
+	space root
+		background: Color yellow;
+		layout: BlFlowLayout horizontal.
+	aPattern transformDo: [ :c |
+		c translateBy: 120@200
+		 ].
+	space root addChild: aPattern .
+	space show.
+	^ aPattern 
+
+
+
+]
+
 { #category : #accessing }
 MfPatternElement >> pattern [
 
