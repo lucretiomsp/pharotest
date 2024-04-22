@@ -48,7 +48,8 @@ MfPatternElement >> initialize [
 	self background: self backgroundPaint .
 	self geometry: BlRectangle new.
 	self layout: BlFrameLayout new.
-	
+	self addBarsToThePattern: self nbbars .
+	self addDrumInBar 
 ]
 
 { #category : #accessing }
