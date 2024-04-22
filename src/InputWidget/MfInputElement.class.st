@@ -1,6 +1,9 @@
 Class {
 	#name : #MfInputElement,
 	#superclass : #BlElement,
+	#instVars : [
+		'inputText'
+	],
 	#category : #InputWidget
 }
 
@@ -12,10 +15,14 @@ MfInputElement >> backgroundPaint [
 
 { #category : #'as yet unclassified' }
 MfInputElement >> decreaseInput [
+
+inputText text: (inputText text string asNumber - 1) asString.  
 ]
 
 { #category : #'as yet unclassified' }
 MfInputElement >> increaseInput [
+
+inputText text: (inputText text asNumber + 1) asString.  
 ]
 
 { #category : #initialization }
@@ -26,8 +33,9 @@ self size: self inputExtent .
 self background: self backgroundPaint .
 self geometry: BlRectangle new.
 self layout: BlFrameLayout new.
-self initializePlusMinus.
-self initializeInputText.
+self initializePlus.
+self initializeMinus.
+inputText:= self initializeInputText.
 self initializeInputValue.
 
 ]
@@ -38,7 +46,7 @@ MfInputElement >> initializeInputText [
 | inputtext |
 
 inputtext := MfInputText new.
-self addChild: inputtext .
+self addChild: inputtext at:1.
 
 ^inputtext 
 ]
@@ -54,8 +62,26 @@ self addChild: value .
 ]
 
 { #category : #initialization }
-MfInputElement >> initializePlusMinus [
-	| plus minus |
+MfInputElement >> initializeMinus [
+| minus |
+minus := BlTextElement new
+	text: ('-' asRopedText attributes:  { (BlTextForegroundAttribute paint: Color white)}).
+minus text fontSize: 60.
+minus constraintsDo: [ :c |
+	c frame horizontal alignLeft .
+	c frame vertical alignCenter ].
+minus transformDo: [ :t |
+	t translateBy: 10@0].
+minus addEventHandlerOn: BlMouseDownEvent   do: [ :e | 
+			self decreaseInput .
+			 ].
+self addChild: minus.
+^minus
+]
+
+{ #category : #initialization }
+MfInputElement >> initializePlus [
+	| plus |
 	
 plus := BlTextElement new
 	text: ('+' asRopedText attributes:  { (BlTextForegroundAttribute paint: Color white)}).
@@ -65,18 +91,12 @@ plus constraintsDo: [ :c |
 	c frame vertical alignCenter ].
 plus transformDo: [ :t |
 	t translateBy: (-10)@0].
-	
-minus := BlTextElement new
-	text: ('-' asRopedText attributes:  { (BlTextForegroundAttribute paint: Color white)}).
-minus text fontSize: 60.
-minus constraintsDo: [ :c |
-	c frame horizontal alignLeft .
-	c frame vertical alignCenter ].
-minus transformDo: [ :t |
-	t translateBy: 10@0].
-
-self addChild: minus.
+plus addEventHandlerOn: BlMouseDownEvent   do: [ :e | 
+			self increaseInput .
+			 ].
 self addChild: plus.
+
+^plus
    
 ]
 

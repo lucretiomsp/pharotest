@@ -15,3 +15,15 @@ self constraintsDo: [ :c |
 self transformDo: [ :t |
 	t translateBy: 0@10].
 ]
+
+{ #category : #accessing }
+MfInputText >> text [ 
+
+^text
+]
+
+{ #category : #accessing }
+MfInputText >> text: aText [
+
+text := aText
+]
