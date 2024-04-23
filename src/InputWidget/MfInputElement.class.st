@@ -49,7 +49,7 @@ self border: (BlBorder paint: Color pink).
 plus := self initializePlus.
 minus :=self initializeMinus.
 inputValue:= self initializeInputValue. 
-value := inputValue text asString asNumber .
+value := inputValue text asString asNumber.
 self initializeInputText .
 
 
@@ -203,5 +203,5 @@ MfInputElement >> plusOrMinus [
 { #category : #evaluating }
 MfInputElement >> value [ 
 
-^ inputValue.
+^ value.
 ]
