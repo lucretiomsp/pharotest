@@ -14,7 +14,7 @@ MfInputElement >> backgroundPaint [
 	^ Color black
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #action }
 MfInputElement >> decreaseInput [
 
 value > 0 ifTrue: [ 
@@ -26,7 +26,7 @@ inputValue:= self initializeInputValue: value asString.
 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #action }
 MfInputElement >> increaseInput [ 
 
 value := value + 1.
@@ -95,49 +95,73 @@ self addChild: ivalue.
 
 { #category : #initialization }
 MfInputElement >> initializeMinus [
-| minus |
-minus := BlTextElement new
-	text: ('-' asRopedText attributes:  { (BlTextForegroundAttribute paint: Color white)}).
-minus text fontSize: 60.
-minus constraintsDo: [ :c |
+
+| minus circle |
+
+circle := BlElement new 
+	background: Color black;
+	border: (BlBorder paint: Color white width: 2) ;
+	layout: BlFrameLayout new;
+	geometry: BlCircle new.
+circle constraintsDo: [ :c |
 	c frame horizontal alignLeft .
 	c frame vertical alignCenter ].
-minus transformDo: [ :t |
-	t translateBy: 10@0].
-minus addEventHandlerOn: BlMouseDownEvent   do: [ :e | 
+circle transformDo: [ :t |
+	t translateBy: 15@0].
+
+minus := BlTextElement new
+	text: ('-' asRopedText attributes:  { (BlTextForegroundAttribute paint: Color white)}).
+minus text fontSize: 80.
+minus constraintsDo: [ :c |
+          c frame horizontal alignCenter.
+          c frame vertical alignCenter ].
+circle addEventHandlerOn: BlMouseDownEvent   do: [ :e | 
 			self decreaseInput .
 			 ].
-self addChild: minus.
+		
+circle addChild: minus.
+self addChild: circle.
+
 
 ]
 
 { #category : #initialization }
 MfInputElement >> initializePlus [
-	| plus |
+	| plus circle |
 	
-plus := BlTextElement new
-	text: ('+' asRopedText attributes:  { (BlTextForegroundAttribute paint: Color white)}).
-plus text fontSize: 40.
-plus constraintsDo: [ :c |
+circle := BlElement new 
+	background: Color black;
+	border: (BlBorder paint: Color white width: 2) ;
+	layout: BlFrameLayout new;
+	geometry: BlCircle new.
+circle constraintsDo: [ :c |
 	c frame horizontal alignRight .
 	c frame vertical alignCenter ].
-plus transformDo: [ :t |
-	t translateBy: (-10)@0].
-plus addEventHandlerOn: BlMouseDownEvent   do: [ :e | 
+circle transformDo: [ :t |
+	t translateBy: (-15)@0].
+
+plus := BlTextElement new
+	text: ('+' asRopedText attributes:  { (BlTextForegroundAttribute paint: Color white)}).
+plus text fontSize: 55.
+plus constraintsDo: [ :c |
+	c frame horizontal alignCenter .
+	c frame vertical alignCenter ].
+circle addEventHandlerOn: BlMouseDownEvent   do: [ :e | 
 			self increaseInput .
 			 ].
-self addChild: plus.
+circle addChild: plus.
+self addChild: circle.
 
    
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'visual properties' }
 MfInputElement >> inputExtent [
 
 	^ 300@120
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #action }
 MfInputElement >> openInput: anInput [
 	| space |
 	space := BlSpace new.
