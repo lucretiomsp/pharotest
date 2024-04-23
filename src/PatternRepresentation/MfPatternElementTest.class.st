@@ -20,6 +20,23 @@ self assert:  patternElem children size equals: 16.
 ]
 
 { #category : #tests }
+MfPatternElementTest >> testDrumRemovedOnClick [
+
+| pattern patternElem |
+
+pattern:= MfPattern new name:'random'.
+patternElem:= MfPatternElement new pattern: pattern; min: 4; max:16; nbbars:12 .
+patternElem childrenDo: [ :e |
+	e simulateClickOn: e. "proved by previous test, all drums equals true"
+	 ].
+patternElem childrenDo: [ :e |
+	e simulateClickOn: e.
+		self assert: e drum equals: false
+	 ].
+
+]
+
+{ #category : #tests }
 MfPatternElementTest >> testIfDrumAssignedOnClick [
 
 | pattern patternElem |
