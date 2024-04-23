@@ -25,5 +25,5 @@ MfInputText >> text [
 { #category : #accessing }
 MfInputText >> text: aText [
 
-text := aText
+text:= aText .
 ]

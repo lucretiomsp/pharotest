@@ -2,7 +2,8 @@ Class {
 	#name : #MfInputElement,
 	#superclass : #BlElement,
 	#instVars : [
-		'inputText'
+		'inputValue',
+		'value'
 	],
 	#category : #InputWidget
 }
@@ -16,13 +17,22 @@ MfInputElement >> backgroundPaint [
 { #category : #'as yet unclassified' }
 MfInputElement >> decreaseInput [
 
-inputText text: (inputText text string asNumber - 1) asString.  
+value > 0 ifTrue: [ 
+	value:= value -1.
+ ].
+inputValue removeFromParent .
+inputValue:= self initializeInputValue: value asString.
+
+
 ]
 
 { #category : #'as yet unclassified' }
-MfInputElement >> increaseInput [
+MfInputElement >> increaseInput [ 
 
-inputText text: (inputText text asNumber + 1) asString.  
+value := value + 1.
+inputValue removeFromParent .
+inputValue:= self initializeInputValue: value asString.
+
 ]
 
 { #category : #initialization }
@@ -35,8 +45,14 @@ self geometry: BlRectangle new.
 self layout: BlFrameLayout new.
 self initializePlus.
 self initializeMinus.
-inputText:= self initializeInputText.
-self initializeInputValue.
+inputValue:= self initializeInputValue. 
+value := inputValue text asString asNumber .
+self initializeInputText .
+
+
+
+
+
 
 ]
 
@@ -46,7 +62,7 @@ MfInputElement >> initializeInputText [
 | inputtext |
 
 inputtext := MfInputText new.
-self addChild: inputtext at:1.
+self addChild: inputtext.
 
 ^inputtext 
 ]
@@ -54,11 +70,27 @@ self addChild: inputtext at:1.
 { #category : #initialization }
 MfInputElement >> initializeInputValue [
 
-| value|
-value := MfInputValue new.
-self addChild: value .
+| ivalue|
+ivalue := MfInputValue new.
+ivalue  text: '20' asRopedText .
+ivalue text attributes:  { (BlTextForegroundAttribute paint: Color white)}.
+ivalue text fontSize: 30.
+self addChild: ivalue.
 
-^value
+^ivalue
+]
+
+{ #category : #initialization }
+MfInputElement >> initializeInputValue: aValue [
+
+| ivalue|
+ivalue := MfInputValue new.
+ivalue  text: aValue asRopedText .
+ivalue text attributes:  { (BlTextForegroundAttribute paint: Color white)}.
+ivalue text fontSize: 30.
+self addChild: ivalue.
+
+^ivalue
 ]
 
 { #category : #initialization }
@@ -76,7 +108,7 @@ minus addEventHandlerOn: BlMouseDownEvent   do: [ :e |
 			self decreaseInput .
 			 ].
 self addChild: minus.
-^minus
+
 ]
 
 { #category : #initialization }
@@ -96,7 +128,6 @@ plus addEventHandlerOn: BlMouseDownEvent   do: [ :e |
 			 ].
 self addChild: plus.
 
-^plus
    
 ]
 
