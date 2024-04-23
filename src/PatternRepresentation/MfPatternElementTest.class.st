@@ -27,10 +27,10 @@ MfPatternElementTest >> testDrumRemovedOnClick [
 pattern:= MfPattern new name:'random'.
 patternElem:= MfPatternElement new pattern: pattern; min: 4; max:16; nbbars:12 .
 patternElem childrenDo: [ :e |
-	e simulateClickOn: e. "proved by previous test, all drums equals true"
+	BlSpace simulateClickOn: e. "proved by previous test, all drums equals true"
 	 ].
 patternElem childrenDo: [ :e |
-	e simulateClickOn: e.
+	BlSpace simulateClickOn: e.
 		self assert: e drum equals: false
 	 ].
 
