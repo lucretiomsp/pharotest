@@ -43,8 +43,9 @@ MfInputElement >> initialize [
 super initialize .
 self size: self inputExtent .
 self background: self backgroundPaint .
-self geometry: BlRectangle new.
+self geometry: (BlRoundedRectangleGeometry cornerRadius: 20).
 self layout: BlFrameLayout new.
+self border: (BlBorder paint: Color pink).
 plus := self initializePlus.
 minus :=self initializeMinus.
 inputValue:= self initializeInputValue. 
