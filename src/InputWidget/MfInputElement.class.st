@@ -3,7 +3,9 @@ Class {
 	#superclass : #BlElement,
 	#instVars : [
 		'inputValue',
-		'value'
+		'value',
+		'minus',
+		'plus'
 	],
 	#category : #InputWidget
 }
@@ -43,8 +45,8 @@ self size: self inputExtent .
 self background: self backgroundPaint .
 self geometry: BlRectangle new.
 self layout: BlFrameLayout new.
-self initializePlus.
-self initializeMinus.
+plus := self initializePlus.
+minus :=self initializeMinus.
 inputValue:= self initializeInputValue. 
 value := inputValue text asString asNumber .
 self initializeInputText .
@@ -96,11 +98,11 @@ self addChild: ivalue.
 { #category : #initialization }
 MfInputElement >> initializeMinus [
 
-| minus circle |
+| circle |
 
 circle := BlElement new 
 	background: Color black;
-	border: (BlBorder paint: Color white width: 2) ;
+	border: (BlBorder paint: Color pink width: 2) ;
 	layout: BlFrameLayout new;
 	geometry: BlCircle new.
 circle constraintsDo: [ :c |
@@ -122,16 +124,18 @@ circle addEventHandlerOn: BlMouseDownEvent   do: [ :e |
 circle addChild: minus.
 self addChild: circle.
 
+^circle
+
 
 ]
 
 { #category : #initialization }
 MfInputElement >> initializePlus [
-	| plus circle |
+	| circle |
 	
 circle := BlElement new 
 	background: Color black;
-	border: (BlBorder paint: Color white width: 2) ;
+	border: (BlBorder paint: Color pink width: 2) ;
 	layout: BlFrameLayout new;
 	geometry: BlCircle new.
 circle constraintsDo: [ :c |
@@ -152,6 +156,7 @@ circle addEventHandlerOn: BlMouseDownEvent   do: [ :e |
 circle addChild: plus.
 self addChild: circle.
 
+^ circle.
    
 ]
 
@@ -159,6 +164,12 @@ self addChild: circle.
 MfInputElement >> inputExtent [
 
 	^ 300@120
+]
+
+{ #category : #accessing }
+MfInputElement >> minus [ 
+
+^minus.
 ]
 
 { #category : #action }
@@ -176,4 +187,20 @@ MfInputElement >> openInput: anInput [
 	^ anInput 
 
 
+]
+
+{ #category : #'special characters' }
+MfInputElement >> plus [
+^plus.
+]
+
+{ #category : #'special characters' }
+MfInputElement >> plusOrMinus [ 
+^plus.
+]
+
+{ #category : #evaluating }
+MfInputElement >> value [ 
+
+^ value.
 ]

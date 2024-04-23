@@ -1,7 +1,7 @@
 Class {
 	#name : #MfBar,
 	#superclass : #BlElement,
-	#classVars : [
+	#instVars : [
 		'drum'
 	],
 	#category : #PatternRepresentation
@@ -9,6 +9,7 @@ Class {
 
 { #category : #action }
 MfBar >> assignDrum [
+
 drum := true.
 ]
 

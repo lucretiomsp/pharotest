@@ -27,10 +27,10 @@ MfPatternElement >> addBarsToThePattern: nbBars [
 { #category : #adding }
 MfPatternElement >> addDrumInBar [
 	self childrenDo: [ :child |
-		child addEventHandlerOn: BlMouseDownEvent   do: [ :ee | 
-			child background paint color == Color white
-			ifTrue: [ child background: Color black. child assignDrum.]
-			ifFalse: [ child background: Color white. child removeDrum. ]
+		child addEventHandlerOn: BlMouseDownEvent   do: [ :evt | 
+			child drum == false
+			ifTrue: [ child background: Color black. child assignDrum ]
+			ifFalse: [ child background: Color white. child removeDrum]
 			 ].].
 ]
 
@@ -49,7 +49,7 @@ MfPatternElement >> initialize [
 	self geometry: BlRectangle new.
 	self layout: BlFrameLayout new.
 	self addBarsToThePattern: self nbbars .
-	self addDrumInBar 
+	self addDrumInBar .
 ]
 
 { #category : #accessing }
@@ -99,7 +99,7 @@ MfPatternElement >> openPattern: aPattern [
 		 ].
 	space root addChild: aPattern .
 	space show.
-	^ aPattern 
+	^ space 
 
 
 
