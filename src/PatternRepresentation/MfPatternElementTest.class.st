@@ -33,3 +33,17 @@ patternElem childrenDo: [ :e |
 
 
 ]
+
+{ #category : #tests }
+MfPatternElementTest >> testPatternIsEmptyIfNbBarsNotValid [
+
+| pattern patternE1 patternE2 |
+
+pattern:= MfPattern new name:'random'.
+patternE1:= MfPatternElement new pattern: pattern; min:4; max:12; nbbars:13.
+self assert:  patternE1 children size equals: 0.
+
+patternE2:= MfPatternElement new pattern: pattern; min:8; max: 16; nbbars:4.
+self assert: patternE2 children size equals: 0. 
+
+]

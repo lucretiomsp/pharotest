@@ -15,6 +15,18 @@ self assert: inputElem children size equals: 4.
 ]
 
 { #category : #tests }
+MfInputElementTest >> testValueCantBeNegative [
+
+| inputElem value |
+
+inputElem:= MfInputElement new.
+value := (inputElem initializeInputValue:  '0') text asString asNumber .
+BlSpace simulateClickOn: inputElem minus.
+self assert: value equals: 0.
+
+]
+
+{ #category : #tests }
 MfInputElementTest >> testValueUpdatedOnClick [
 
 | inputElem |

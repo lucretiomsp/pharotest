@@ -87,7 +87,7 @@ MfPatternElement >> nbbars: someNbBars [
 nbbars:= someNbBars .
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #action }
 MfPatternElement >> openPattern: aPattern [
 	| space |
 	space := BlSpace new.

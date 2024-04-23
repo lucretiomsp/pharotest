@@ -203,5 +203,5 @@ MfInputElement >> plusOrMinus [
 { #category : #evaluating }
 MfInputElement >> value [ 
 
-^ value.
+^ inputValue.
 ]
