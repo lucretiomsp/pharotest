@@ -22,6 +22,6 @@ MfPattern >> name [
 
 { #category : #accessing }
 MfPattern >> name: aName [
-
+	"Change the name of the pattern to the given name"
 name := aName.
 ]

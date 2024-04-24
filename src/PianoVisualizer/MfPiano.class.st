@@ -8,10 +8,6 @@ Class {
 MfPiano >> addNotesToPiano [
 ]
 
-{ #category : #adding }
-MfPiano >> addNotestoPiano [
-]
-
 { #category : #'visual properties' }
 MfPiano >> backgroundPaint [ 
 

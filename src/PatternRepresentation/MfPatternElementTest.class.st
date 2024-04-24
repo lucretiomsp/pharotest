@@ -8,12 +8,15 @@ Class {
 MfPatternElementTest >> testBarsAreInitializedCorrectlyInPattern [
 
 | pattern patternElem |
-
+"create a pattern to assign to the element"
 pattern:= MfPattern new name:'Snare'.
-patternElem:= MfPatternElement new pattern: pattern; min: 4; max:16; nbbars:16 .
+"Create the pattern element and give him the number of bars we want in "
+patternElem:= MfPatternElement new pattern: pattern; min: 4; max:16; nbbars:16.
+"At creation all bars have no drum assigned"
 patternElem childrenDo: [ :e |
 	self assert: e drum equals: false. 
 	self assert: e background paint color equals: Color white. ].
+"Test if all 16 bars are added to the pattern element"
 self assert:  patternElem children size equals: 16. 
 
 
@@ -23,15 +26,16 @@ self assert:  patternElem children size equals: 16.
 MfPatternElementTest >> testDrumRemovedOnClick [
 
 | pattern patternElem |
-
+"Create the pattern element"
 pattern:= MfPattern new name:'random'.
 patternElem:= MfPatternElement new pattern: pattern; min: 4; max:16; nbbars:12 .
 patternElem childrenDo: [ :e |
-	BlSpace simulateClickOn: e. "proved by previous test, all drums equals true"
+	BlSpace simulateClickOn: e. "proved by previous test, all drums attributes equals true"
 	 ].
+"Clicking a second time on all bars"
 patternElem childrenDo: [ :e |
 	BlSpace simulateClickOn: e.
-		self assert: e drum equals: false
+		self assert: e drum equals: false "Now all bars have no drums, same as creation state"
 	 ].
 
 ]
@@ -40,12 +44,13 @@ patternElem childrenDo: [ :e |
 MfPatternElementTest >> testIfDrumAssignedOnClick [
 
 | pattern patternElem |
-
+" Create the pattern element"
 pattern:= MfPattern new name:'random'.
 patternElem:= MfPatternElement new pattern: pattern; min: 4; max:16; nbbars:12 .
+"Simulate a click on all bars in the pattern"
 patternElem childrenDo: [ :e |
 	BlSpace simulateClickOn: e.
-	self assert: e drum equals: true
+	self assert: e drum equals: true "Now all bars have a drum assigned"
 	 ].
 
 
@@ -55,12 +60,11 @@ patternElem childrenDo: [ :e |
 MfPatternElementTest >> testPatternIsEmptyIfNbBarsNotValid [
 
 | pattern patternE1 patternE2 |
-
+"Create two pattern elements with differents min/max bars allowed"
 pattern:= MfPattern new name:'random'.
 patternE1:= MfPatternElement new pattern: pattern; min:4; max:12; nbbars:13.
-self assert:  patternE1 children size equals: 0.
-
+self assert:  patternE1 children size equals: 0. "Bars not added to element, over the max"
 patternE2:= MfPatternElement new pattern: pattern; min:8; max: 16; nbbars:4.
-self assert: patternE2 children size equals: 0. 
+self assert: patternE2 children size equals: 0. "Bars not added to element, under the min"
 
 ]

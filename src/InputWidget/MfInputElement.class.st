@@ -1,6 +1,6 @@
 Class {
 	#name : #MfInputElement,
-	#superclass : #BlElement,
+	#superclass : #ToElement,
 	#instVars : [
 		'inputValue',
 		'value',
@@ -12,12 +12,14 @@ Class {
 
 { #category : #'visual properties' }
 MfInputElement >> backgroundPaint [ 
+	"Set the background for the element to black"
 	
 	^ Color black
 ]
 
 { #category : #action }
 MfInputElement >> decreaseInput [
+	"Check if the value is not 0, then create a new updated value"
 
 value > 0 ifTrue: [ 
 	value:= value -1.
@@ -30,7 +32,7 @@ inputValue:= self initializeInputValue: value asString.
 
 { #category : #action }
 MfInputElement >> increaseInput [ 
-
+	"create an updated value added to the input elem"
 value := value + 1.
 inputValue removeFromParent .
 inputValue:= self initializeInputValue: value asString.
@@ -61,7 +63,7 @@ self initializeInputText .
 
 { #category : #initialization }
 MfInputElement >> initializeInputText [
-
+	"get the input text"
 | inputtext |
 
 inputtext := MfInputText new.
@@ -72,7 +74,7 @@ self addChild: inputtext.
 
 { #category : #initialization }
 MfInputElement >> initializeInputValue [
-
+	"setting the default value to 20 and setting its attributes"
 | ivalue|
 ivalue := MfInputValue new.
 ivalue  text: '20' asRopedText .
@@ -85,7 +87,7 @@ self addChild: ivalue.
 
 { #category : #initialization }
 MfInputElement >> initializeInputValue: aValue [
-
+	"update the value by creating a new one having the value aValue passed as parameter"
 | ivalue|
 ivalue := MfInputValue new.
 ivalue  text: aValue asRopedText .
@@ -163,7 +165,7 @@ self addChild: circle.
 
 { #category : #'visual properties' }
 MfInputElement >> inputExtent [
-
+	"set the size of input element"
 	^ 300@120
 ]
 
@@ -175,6 +177,7 @@ MfInputElement >> minus [
 
 { #category : #action }
 MfInputElement >> openInput: anInput [
+	"sets configuration to display the input element in a space"
 	| space |
 	space := BlSpace new.
 	space root
@@ -192,11 +195,6 @@ MfInputElement >> openInput: anInput [
 
 { #category : #'special characters' }
 MfInputElement >> plus [
-^plus.
-]
-
-{ #category : #'special characters' }
-MfInputElement >> plusOrMinus [ 
 ^plus.
 ]
 

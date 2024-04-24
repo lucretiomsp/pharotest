@@ -18,12 +18,13 @@ self transformDo: [ :t |
 
 { #category : #accessing }
 MfInputText >> text [ 
+	"get the text of the input"
 
 ^text
 ]
 
 { #category : #accessing }
 MfInputText >> text: aText [
-
+	"allow to set the text as aText"
 text:= aText .
 ]

@@ -1,6 +1,6 @@
 Class {
 	#name : #MfPatternElement,
-	#superclass : #BlElement,
+	#superclass : #ToElement,
 	#classVars : [
 		'max',
 		'min',
@@ -12,7 +12,7 @@ Class {
 
 { #category : #adding }
 MfPatternElement >> addBarsToThePattern: nbBars [
-
+	"Add all bars element in the pattern to display them"
 	| bar changingX |
 	changingX := 2.5.
 	(nbBars between: self min and: self max) ifTrue: [
@@ -26,6 +26,7 @@ MfPatternElement >> addBarsToThePattern: nbBars [
 
 { #category : #adding }
 MfPatternElement >> addDrumInBar [
+	"Change the value of the drum attribute for the bar clicked, and update his color for visualization undestanding"
 	self childrenDo: [ :child |
 		child addEventHandlerOn: BlMouseDownEvent   do: [ :evt | 
 			child drum == false
@@ -36,7 +37,7 @@ MfPatternElement >> addDrumInBar [
 
 { #category : #'visual properties' }
 MfPatternElement >> backgroundPaint [ 
-	
+	"Define the background for the pattern"
 	^ Color red
 ]
 
@@ -89,7 +90,8 @@ nbbars:= someNbBars .
 
 { #category : #action }
 MfPatternElement >> openPattern: aPattern [
-	| space |
+
+| space |
 	space := BlSpace new.
 	space root
 		background: Color yellow;
@@ -98,6 +100,7 @@ MfPatternElement >> openPattern: aPattern [
 		c translateBy: 120@200
 		 ].
 	space root addChild: aPattern .
+	self withSkin: 
 	space show.
 	^ space 
 
