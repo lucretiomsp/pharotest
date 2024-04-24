@@ -1,5 +1,5 @@
 Class {
 	#name : #MfInputElementSkin,
-	#superclass : #ToElement,
+	#superclass : #ToRawSkin,
 	#category : #InputWidget
 }

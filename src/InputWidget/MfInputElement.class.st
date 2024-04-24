@@ -30,6 +30,24 @@ inputValue:= self initializeInputValue: value asString.
 
 ]
 
+{ #category : #initialization }
+MfInputElement >> defaultBorder [ 
+
+^BlBorder paint: Color pink.
+]
+
+{ #category : #initialization }
+MfInputElement >> defaultGeometry [ 
+
+^BlRoundedRectangleGeometry cornerRadius: 20.
+]
+
+{ #category : #initialization }
+MfInputElement >> defaultLayout [ 
+
+^BlFrameLayout new.
+]
+
 { #category : #action }
 MfInputElement >> increaseInput [ 
 	"create an updated value added to the input elem"
@@ -169,10 +187,29 @@ MfInputElement >> inputExtent [
 	^ 300@120
 ]
 
+{ #category : #skin }
+MfInputElement >> installRawStyle [ 
+
+	super installRawStyle.
+	self geometry: self defaultGeometry.
+	self size: self inputExtent .
+	self background: self backgroundPaint .
+	self layout: self defaultLayout.
+	self border: self defaultBorder.
+
+
+]
+
 { #category : #accessing }
 MfInputElement >> minus [ 
 
 ^minus.
+]
+
+{ #category : #'instance creation' }
+MfInputElement >> newRawSkin [ 
+
+^MfInputElementSkin new.
 ]
 
 { #category : #action }
