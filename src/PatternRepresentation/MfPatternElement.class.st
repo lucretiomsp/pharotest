@@ -53,6 +53,13 @@ MfPatternElement >> initialize [
 	self addDrumInBar .
 ]
 
+{ #category : #initialization }
+MfPatternElement >> initializePatternSkin [
+
+self newRawSkin .
+
+]
+
 { #category : #accessing }
 MfPatternElement >> max [ 
 	

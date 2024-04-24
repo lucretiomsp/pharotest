@@ -187,6 +187,7 @@ MfInputElement >> openInput: anInput [
 		c translateBy: 200@200
 		 ].
 	space root addChild: anInput  .
+	space toTheme: ToBeeDarkTheme new .
 	space show.
 	^ anInput 
 
