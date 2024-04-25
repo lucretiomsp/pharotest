@@ -17,7 +17,7 @@ self assert:  inputElem value equals: 20. "As default value defined in the code"
 ]
 
 { #category : #tests }
-MfInputElementTest >> testSkinChangesOnClick [
+MfInputElementTest >> testSkinisInstalledCorrectly [
 
 | inputElem |
 "create instance of input"

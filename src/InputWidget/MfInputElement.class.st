@@ -219,7 +219,7 @@ MfInputElement >> openInput: anInput [
 	space root
 		layout: BlFlowLayout horizontal.
 	anInput transformDo: [ :c |
-		c translateBy: 200@200
+		c translateBy: 250@200
 		 ].
 	space root addChild: anInput  .
 	space toTheme: MfInputElementTheme new .
