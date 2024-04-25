@@ -10,6 +10,10 @@ Class {
 	#category : #InputWidget
 }
 
+{ #category : #'as yet unclassified' }
+MfInputElement >> assignSkin [
+]
+
 { #category : #'visual properties' }
 MfInputElement >> backgroundPaint [ 
 	"Set the background for the element to black"
@@ -63,9 +67,7 @@ MfInputElement >> initialize [
 super initialize .
 self geometry: self defaultGeometry.
 self size: self inputExtent .
-self background: self backgroundPaint .
 self layout: self defaultLayout.
-self border: self defaultBorder.
 plus := self initializePlus.
 minus :=self initializeMinus.
 inputValue:= self initializeInputValue. 
@@ -221,6 +223,7 @@ MfInputElement >> openInput: anInput [
 		 ].
 	space root addChild: anInput  .
 	space toTheme: MfInputElementTheme new .
+	space applyAllSkinInstallers .
 	space show.
 	^ anInput 
 
