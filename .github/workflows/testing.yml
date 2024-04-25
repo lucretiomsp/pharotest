@@ -10,11 +10,15 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    strategy:
+      matrix:
+        smalltalk: [ Pharo64-11 ]
+    name: ${{ matrix.smalltalk }}
     steps:
       - uses: actions/checkout@v3
       - uses: hpi-swa/setup-smalltalkCI@v1
         with:
-          smalltalk-image: Pharo64-10
+          smalltalk-image: ${{ matrix.smalltalk }}
       - run: smalltalkci -s ${{ matrix.smalltalk }}
         shell: bash
         timeout-minutes: 15
