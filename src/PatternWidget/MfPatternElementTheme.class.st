@@ -4,6 +4,10 @@ Class {
 	#category : #PatternWidget
 }
 
+{ #category : #'as yet unclassified' }
+MfPatternElementTheme class >> ahouioui [
+]
+
 { #category : #accessing }
 MfPatternElementTheme class >> defaultTokenProperties [
 "define here token properties of the widget theme"
