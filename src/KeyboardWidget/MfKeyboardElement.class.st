@@ -110,7 +110,8 @@ MfKeyboardElement >> initializeSecondRow [
 { #category : #initialization }
 MfKeyboardElement >> initializeThirdRow [
 	| theKeys |
-	
+	"add all keys in the third row, for example the shift left key is a big key
+	so we add it as a wideKey"
 	self addButton: (self wideKey: 'shift' span: 2.42) key: KeyboardKey shiftLeft.
 	
 	theKeys := #(Z X C V B N M) collect: [ :each | KeyboardKey perform: each ].

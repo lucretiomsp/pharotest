@@ -109,7 +109,7 @@ MfPatternElement >> openPattern: aPattern [
 	space toTheme: MfPatternElementTheme new .
 	space applyAllSkinInstallers .
 	space show.
-	^ space 
+	^ aPattern .
 
 
 
