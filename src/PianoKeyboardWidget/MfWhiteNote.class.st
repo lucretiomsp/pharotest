@@ -1,5 +1,5 @@
 Class {
 	#name : #MfWhiteNote,
 	#superclass : #BlElement,
-	#category : #PianoVisualizer
+	#category : #PianoKeyboardWidget
 }

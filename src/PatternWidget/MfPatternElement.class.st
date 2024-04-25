@@ -7,7 +7,7 @@ Class {
 		'nbbars',
 		'pattern'
 	],
-	#category : #PatternRepresentation
+	#category : #PatternWidget
 }
 
 { #category : #adding }

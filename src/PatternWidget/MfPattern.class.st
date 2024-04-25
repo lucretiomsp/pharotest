@@ -4,7 +4,7 @@ Class {
 	#classVars : [
 		'name'
 	],
-	#category : #PatternRepresentation
+	#category : #PatternWidget
 }
 
 { #category : #initialization }

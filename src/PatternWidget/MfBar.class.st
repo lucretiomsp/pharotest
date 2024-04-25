@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'drum'
 	],
-	#category : #PatternRepresentation
+	#category : #PatternWidget
 }
 
 { #category : #action }

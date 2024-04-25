@@ -1,7 +1,7 @@
 Class {
 	#name : #MfPatternElementTheme,
 	#superclass : #ToRawTheme,
-	#category : #PatternRepresentation
+	#category : #PatternWidget
 }
 
 { #category : #accessing }

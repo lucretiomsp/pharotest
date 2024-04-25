@@ -1,7 +1,7 @@
 Class {
 	#name : #MfPiano,
 	#superclass : #BlElement,
-	#category : #PianoVisualizer
+	#category : #PianoKeyboardWidget
 }
 
 { #category : #adding }

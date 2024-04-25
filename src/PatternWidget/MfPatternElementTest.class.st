@@ -1,7 +1,7 @@
 Class {
 	#name : #MfPatternElementTest,
 	#superclass : #TestCase,
-	#category : #PatternRepresentation
+	#category : #PatternWidget
 }
 
 { #category : #'test-init' }

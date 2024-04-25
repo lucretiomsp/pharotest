@@ -1,7 +1,7 @@
 Class {
 	#name : #MfPatternElementSkin,
 	#superclass : #ToRawSkin,
-	#category : #PatternRepresentation
+	#category : #PatternWidget
 }
 
 { #category : #'event handling' }
