@@ -9,6 +9,7 @@ Class {
 
 { #category : #initialization }
 MfKeyboardElement >> addButton: anElement key: aKey [
+	"add the key passed as parameter to the key dictionnary"
 	keymap at: aKey put: anElement.
 	self addChild: anElement
 ]
@@ -30,7 +31,7 @@ MfKeyboardElement >> initialize [
 
 { #category : #initialization }
 MfKeyboardElement >> initializeBottomRow [
-	
+	"add all keys from the bottom row of keyboard"
 	self addButton: (self simpleSmallKey: 'fn') key: KeyboardKey function.
 	self addButton: (self simpleSmallKey: 'control') key: KeyboardKey controlLeft.
 	self addButton: (self simpleSmallKey: 'option') key: KeyboardKey altLeft.
@@ -47,32 +48,32 @@ MfKeyboardElement >> initializeBottomRow [
 
 { #category : #initialization }
 MfKeyboardElement >> initializeEventListeners [
-	self
-		when: BlKeyDownEvent
-		do: [ :anEvent | 
-			('down: ' , anEvent key asString) traceCr.
-			StringSignal emit: 'down: ' , anEvent key asString.
-			keymap
-				at: anEvent key
-				ifPresent: [ :aButton | aButton background: Color veryVeryLightGray ]
-				ifAbsent: [ self inform: 'Unknown: ' , anEvent key asString.
-					NonInteractiveTranscript stdout
-						show: 'Unknown: ' , anEvent key asString;
-						cr ] ].
-	self
-		when: BlKeyUpEvent
-		do: [ :anEvent | 
-			('up ' , anEvent key asString) traceCr.
-			StringSignal emit: 'up: ' , anEvent key asString.
-			keymap
-				at: anEvent key
-				ifPresent: [ :aButton | aButton background: Color white ] ]
+"when pressing a key, changes the color of it and notify a down/unknown if the key is not in the dico"
+	self addEventHandlerOn: BlKeyDownEvent do: [ :anEvent |
+		('down: ' , anEvent key asString) traceCr.
+		StringSignal emit: 'down: ' , anEvent key asString.
+		keymap
+			at: anEvent key
+			ifPresent: [ :aButton |
+			aButton background: Color veryVeryLightGray ]
+			ifAbsent: [
+				self inform: 'Unknown: ' , anEvent key asString.
+				NonInteractiveTranscript stdout
+					show: 'Unknown: ' , anEvent key asString;
+					cr ] ].
+			"doing the same when keyup by reset the key color and sending up notification"
+	self addEventHandlerOn: BlKeyUpEvent do: [ :anEvent |
+		('up ' , anEvent key asString) traceCr.
+		StringSignal emit: 'up: ' , anEvent key asString.
+		keymap
+			at: anEvent key
+			ifPresent: [ :aButton | aButton background: Color white ] ]
 ]
 
 { #category : #initialization }
 MfKeyboardElement >> initializeFirstRow [
 	| theKeys |
-	
+	"add all keys from first row to the keys dico"
 	self addButton: (self wideKey: 'tab' span: 1.45) key: KeyboardKey tab.
 	
 	theKeys := #(Q W E R T Y U I O P) collect: [ :each | KeyboardKey perform: each ].
@@ -138,16 +139,25 @@ MfKeyboardElement >> initializeTopRow [
 
 { #category : #geometry }
 MfKeyboardElement >> keyboardHeight [
+"sets the keyboard widget height"
 	^ (5 * self rowHeight) + ((5 * 2 + 1) * self spacing)
 ]
 
 { #category : #geometry }
 MfKeyboardElement >> keyboardWidth [
+	"sets the keyboard widget width"
 	^ self rowWidth
+]
+
+{ #category : #accessing }
+MfKeyboardElement >> keymap [ 
+
+	^keymap.
 ]
 
 { #category : #'instance creation' }
 MfKeyboardElement >> newButton: anExtent [
+	"creates an instance of button and give its graphical properties"
 	^ BlElement new
 		size: anExtent;
 		geometry: (BlRoundedRectangleGeometry cornerRadius: 4);
@@ -171,7 +181,7 @@ MfKeyboardElement >> rowWidth [
 { #category : #'instance creation' }
 MfKeyboardElement >> simpleKey: aString [
 	| button label |
-
+	"assign a key to the button instance created by newButton: "
 	button := self newButton: self simpleKeyExtent.
 
 	label := BlTextElement new.
