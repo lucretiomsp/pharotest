@@ -46,7 +46,6 @@ MfPatternElement >> initialize [
 
 	super initialize.
 	self size: self patternExtent .
-	self background: self backgroundPaint .
 	self geometry: BlRectangle new.
 	self layout: BlFrameLayout new.
 	self addBarsToThePattern: self nbbars .
@@ -100,14 +99,15 @@ MfPatternElement >> openPattern: aPattern [
 
 | space |
 	space := BlSpace new.
+	aPattern defaultSkin: MfPatternElementSkin new.
 	space root
-		background: Color yellow;
 		layout: BlFlowLayout horizontal.
 	aPattern transformDo: [ :c |
-		c translateBy: 120@200
+		c translateBy: 180@200
 		 ].
 	space root addChild: aPattern .
-	self withSkin: 
+	space toTheme: MfPatternElementTheme new .
+	space applyAllSkinInstallers .
 	space show.
 	^ space 
 

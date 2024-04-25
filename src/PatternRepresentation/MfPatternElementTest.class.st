@@ -68,3 +68,16 @@ patternE2:= MfPatternElement new pattern: pattern; min:8; max: 16; nbbars:4.
 self assert: patternE2 children size equals: 0. "Bars not added to element, under the min"
 
 ]
+
+{ #category : #tests }
+MfPatternElementTest >> testSkinisInstalledCorrectly [
+
+| patElem |
+"create instance of input"
+patElem:= MfPatternElement new.
+"input skin is nil"
+self assert: patElem background paint equals: nil .
+patElem openPattern: patElem. "Assign skin to input"
+"Now the input widget has background defined"
+self assert: patElem background paint color equals: Color red .
+]

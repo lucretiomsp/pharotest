@@ -1,5 +1,14 @@
 Class {
 	#name : #MfPatternElementSkin,
-	#superclass : #ToElement,
+	#superclass : #ToRawSkin,
 	#category : #PatternRepresentation
 }
+
+{ #category : #'event handling' }
+MfPatternElementSkin >> installLookEvent: anEvent [
+ 	"when installing the skin, changes the properties of widget mentionned down here"
+	super installLookEvent: anEvent.
+	anEvent elementDo: [ :e |
+		e border: (BlBorder paint: Color black).
+		e background: e backgroundPaint  ].
+]
