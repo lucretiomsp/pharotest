@@ -32,7 +32,7 @@ inputValue:= self initializeInputValue: value asString.
 
 { #category : #initialization }
 MfInputElement >> defaultBorder [ 
-
+	
 ^BlBorder paint: Color pink.
 ]
 
@@ -61,11 +61,11 @@ inputValue:= self initializeInputValue: value asString.
 MfInputElement >> initialize [ 
 
 super initialize .
+self geometry: self defaultGeometry.
 self size: self inputExtent .
 self background: self backgroundPaint .
-self geometry: (BlRoundedRectangleGeometry cornerRadius: 20).
-self layout: BlFrameLayout new.
-self border: (BlBorder paint: Color pink).
+self layout: self defaultLayout.
+self border: self defaultBorder.
 plus := self initializePlus.
 minus :=self initializeMinus.
 inputValue:= self initializeInputValue. 
@@ -189,13 +189,9 @@ MfInputElement >> inputExtent [
 
 { #category : #skin }
 MfInputElement >> installRawStyle [ 
-
+	"Override method to define skin"
 	super installRawStyle.
-	self geometry: self defaultGeometry.
-	self size: self inputExtent .
-	self background: self backgroundPaint .
-	self layout: self defaultLayout.
-	self border: self defaultBorder.
+	
 
 
 ]
@@ -208,7 +204,7 @@ MfInputElement >> minus [
 
 { #category : #'instance creation' }
 MfInputElement >> newRawSkin [ 
-
+	"Allow to create an instance of the widget skin"
 ^MfInputElementSkin new.
 ]
 
@@ -217,14 +213,14 @@ MfInputElement >> openInput: anInput [
 	"sets configuration to display the input element in a space"
 	| space |
 	space := BlSpace new.
+	anInput defaultSkin: MfInputElementSkin new.
 	space root
-		background: Color purple ;
 		layout: BlFlowLayout horizontal.
 	anInput transformDo: [ :c |
 		c translateBy: 200@200
 		 ].
 	space root addChild: anInput  .
-	space toTheme: ToBeeDarkTheme new .
+	space toTheme: MfInputElementTheme new .
 	space show.
 	^ anInput 
 
