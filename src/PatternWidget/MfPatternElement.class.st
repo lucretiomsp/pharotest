@@ -1,6 +1,9 @@
 Class {
 	#name : #MfPatternElement,
 	#superclass : #ToElement,
+	#instVars : [
+		'nbOfBars'
+	],
 	#classVars : [
 		'max',
 		'min',
@@ -13,9 +16,13 @@ Class {
 { #category : #adding }
 MfPatternElement >> addBarsToThePattern: nbBars [
 	"Add all bars element in the pattern to display them"
+	
 	| bar changingX |
+	nbOfBars:= 0.
+	
 	changingX := 2.5.
 	(nbBars between: self min and: self max) ifTrue: [
+		nbOfBars := nbBars.
 		1 to: nbBars do: [ :i |
 			bar := MfBarElement new.
 			bar transformDo: [ :t | t translateBy: changingX @ 0 ].
@@ -27,12 +34,16 @@ MfPatternElement >> addBarsToThePattern: nbBars [
 { #category : #adding }
 MfPatternElement >> addDrumInBar [
 	"Change the value of the drum attribute for the bar clicked, and update his color for visualization undestanding"
+
 	self childrenDo: [ :child |
-		child addEventHandlerOn: BlMouseDownEvent   do: [ :evt | 
-			child drum == false
-			ifTrue: [ child background: Color black. child assignDrum ]
-			ifFalse: [ child background: Color white. child removeDrum]
-			 ].].
+		child addEventHandlerOn: BlMouseDownEvent do: [ :evt |
+			child drum not
+				ifTrue: [
+					child background: Color black.
+					child assignDrum ]
+				ifFalse: [
+					child background: Color white.
+					child removeDrum ] ] ]
 ]
 
 { #category : #'visual properties' }
@@ -42,14 +53,15 @@ MfPatternElement >> backgroundPaint [
 ]
 
 { #category : #initialization }
-MfPatternElement >> initialize [ 
+MfPatternElement >> initialize [
 
 	super initialize.
-	self size: self patternExtent .
-	self geometry: BlRectangle new.
+	self size: self patternExtent.
+	self geometry: BlRectangleGeometry new.
 	self layout: BlFrameLayout new.
-	self addBarsToThePattern: self nbbars .
-	self addDrumInBar .
+	self addBarsToThePattern: self nbbars.
+	self addDrumInBar.
+	self defaultSkin: MfPatternElementSkin new
 ]
 
 { #category : #skin }
@@ -83,6 +95,12 @@ MfPatternElement >> min: aMin [
 ]
 
 { #category : #accessing }
+MfPatternElement >> nbOfBars [
+
+^nbOfBars 
+]
+
+{ #category : #accessing }
 MfPatternElement >> nbbars [		
 	^nbbars.
 ]
@@ -102,22 +120,14 @@ MfPatternElement >> newRawSkin [
 { #category : #action }
 MfPatternElement >> openPattern: aPattern [
 
-| space |
+	| space |
 	space := BlSpace new.
-	aPattern defaultSkin: MfPatternElementSkin new.
-	space root
-		layout: BlFlowLayout horizontal.
-	aPattern transformDo: [ :c |
-		c translateBy: 180@200
-		 ].
-	space root addChild: aPattern .
-	space toTheme: MfPatternElementTheme new .
-	space applyAllSkinInstallers .
-	space show.
-	^ aPattern .
-
-
-
+	space root layout: BlFlowLayout horizontal.
+	aPattern transformDo: [ :c | c translateBy: 180 @ 200 ].
+	space root addChild: aPattern.
+	space toTheme: MfPatternElementTheme new.
+	space applyAllSkinInstallers.
+	^ aPattern
 ]
 
 { #category : #accessing }

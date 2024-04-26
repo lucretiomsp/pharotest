@@ -6,12 +6,12 @@ Class {
 
 { #category : #'event handling' }
 MfInputElementSkin >> installLookEvent: anEvent [
- 	"when installing the skin, changes the properties of widget mentionned down here"
+	"when installing the skin, changes the properties of widget mentionned down here"
+
 	super installLookEvent: anEvent.
 	anEvent elementDo: [ :e |
 		e border: e defaultBorder.
-		e background: e backgroundPaint .
-		].
+		e background: e backgroundPaint ]
 ]
 
 { #category : #'event handling' }

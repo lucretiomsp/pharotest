@@ -7,6 +7,13 @@ Class {
 	#category : #KeyboardWidget
 }
 
+{ #category : #examples }
+MfKeyboardElement class >> example [
+
+	<script>
+	self new openInSpace
+]
+
 { #category : #initialization }
 MfKeyboardElement >> addButton: anElement key: aKey [
 	"add the key passed as parameter to the key dictionnary"

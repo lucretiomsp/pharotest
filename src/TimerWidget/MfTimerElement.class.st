@@ -11,6 +11,18 @@ Class {
 	#category : #TimerWidget
 }
 
+{ #category : #accessing }
+MfTimerElement >> anim [
+	
+	^ anim.
+]
+
+{ #category : #'visual properties' }
+MfTimerElement >> backgroundPaint [ 
+
+	^ Color black.
+]
+
 { #category : #initialization }
 MfTimerElement >> defaultBorder [ 
 
@@ -24,64 +36,57 @@ MfTimerElement >> defaultGeometry [
 ]
 
 { #category : #initialization }
-MfTimerElement >> initAnimation [ 
+MfTimerElement >> initAnimation [
 
-anim:= BlAnimation new
-	duration: 1 seconds;
-	loops: value.
-self addEventHandlerOn:  BlMouseDownEvent do: [ :a |
-	anim addEventHandler: (BlEventHandler on: BlAnimationLoopDoneEvent do: [ :e |
-	self updateValue.
-	self background: Color random.
-	]).
- ].
+	anim := BlAnimation new
+		        duration: 1 seconds;
+		        loops: value.
+	self addEventHandlerOn: BlMouseDownEvent do: [ :a |
+		anim addEventHandler: (BlEventHandler
+				 on: BlAnimationLoopDoneEvent
+				 do: [ :e |
+					 self updateValue.
+					 self background: Color random ]) ].
 
-self addAnimation: anim.
+	self addAnimation: anim
 ]
 
 { #category : #initialization }
 MfTimerElement >> initialize [
 
-super initialize .
-self geometry: self defaultGeometry .
-self border: self defaultBorder.
-self size: 300@300.
-self background: Color black.
-self initAnimation .
-timerValue:= self initializeTimerValue .
+	super initialize.
+	self initAnimation.
+   self initializeTimerValue.
 ]
 
 { #category : #initialization }
-MfTimerElement >> initializeTimerValue [ 
+MfTimerElement >> initializeTimerValue [
 
-| tvalue|
-tvalue := BlTextElement new.
-tvalue text: value asString asRopedText .
-tvalue text attributes:  { (BlTextForegroundAttribute paint: Color lightOrange )}.
-tvalue text fontSize: 100.
-tvalue constraintsDo: [ :c |
-	c frame horizontal alignCenter.
-	c frame vertical alignCenter  ].
+	timerValue := BlTextElement new.
+	timerValue text: value asString asRopedText.
+	timerValue text fontSize: 100.
+	timerValue text attributes:
+		{ (BlTextForegroundAttribute paint: Color lightOrange ) }.
+	timerValue constraintsDo: [ :c |
+		c frame horizontal alignCenter.
+		c frame vertical alignCenter ].
 
-self addChild: tvalue.
-
-^tvalue
+	self addChild: timerValue
 ]
 
 { #category : #initialization }
 MfTimerElement >> initializeTimerValue: aValue [
-	| tvalue |
-tvalue := MfInputValue new.
-tvalue  text:  aValue asString asRopedText .
-tvalue text attributes:  { (BlTextForegroundAttribute paint: Color lightOrange)}.
-tvalue text fontSize: 100.
-tvalue constraintsDo: [ :c |
-	c frame horizontal alignCenter.
-	c frame vertical alignCenter  ].
 
-self addChild: tvalue.
+	timerValue := MfInputValue new.
+	timerValue text: aValue asString asRopedText.
+	timerValue text fontSize: 100.
+	timerValue text attributes:
+		{ (BlTextForegroundAttribute paint: Color lightOrange ) }.
+	timerValue constraintsDo: [ :c |
+		c frame horizontal alignCenter.
+		c frame vertical alignCenter ].
 
-^tvalue
+	self addChild: timerValue
 ]
 
 { #category : #skin }
@@ -96,7 +101,7 @@ MfTimerElement >> newRawSkin [
 ^ MfTimerElementSkin new.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #action }
 MfTimerElement >> openTimer: aTimer [
 	| space |
 	
@@ -119,13 +124,18 @@ space root
 
 ]
 
+{ #category : #accessing }
+MfTimerElement >> timerValue [
+
+^timerValue
+]
+
 { #category : #protocol }
 MfTimerElement >> updateValue [
 
-value := value - 1.
-timerValue removeFromParent .
-timerValue:= self initializeTimerValue: value.
-
+	value := value - 1.
+	timerValue removeFromParent.
+	self initializeTimerValue: value
 ]
 
 { #category : #evaluating }
