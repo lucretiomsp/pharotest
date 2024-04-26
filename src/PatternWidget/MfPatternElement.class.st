@@ -7,8 +7,7 @@ Class {
 	#classVars : [
 		'max',
 		'min',
-		'nbbars',
-		'pattern'
+		'nbbars'
 	],
 	#category : #PatternWidget
 }
@@ -127,19 +126,8 @@ MfPatternElement >> openPattern: aPattern [
 	space root addChild: aPattern.
 	space toTheme: MfPatternElementTheme new.
 	space applyAllSkinInstallers.
+	space show.
 	^ aPattern
-]
-
-{ #category : #accessing }
-MfPatternElement >> pattern [
-
-^pattern.
-]
-
-{ #category : #accessing }
-MfPatternElement >> pattern: aPattern [
-
-pattern:= aPattern.
 ]
 
 { #category : #'visual properties' }
