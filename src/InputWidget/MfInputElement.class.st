@@ -7,6 +7,9 @@ Class {
 		'minus',
 		'plus'
 	],
+	#classVars : [
+		'default'
+	],
 	#category : #InputWidget
 }
 
@@ -28,6 +31,18 @@ inputValue removeFromParent .
 inputValue:= self setInputValue: value .
 
 
+]
+
+{ #category : #accessing }
+MfInputElement >> default [ 
+
+	^default.
+]
+
+{ #category : #accessing }
+MfInputElement >> default: aValue [
+
+default:= aValue .
 ]
 
 { #category : #initialization }
@@ -92,7 +107,7 @@ MfInputElement >> initializeInputValue [
 	"setting the default value to 20 and setting its attributes"
 
 inputValue := MfInputValue new.
-inputValue text: '20' asRopedText .
+inputValue text: default asString asRopedText .
 inputValue text attributes:  { (BlTextForegroundAttribute paint: Color white)}.
 inputValue text fontSize: 30.
 self addChild: inputValue.
@@ -129,7 +144,7 @@ circle addEventHandlerOn: BlMouseDownEvent   do: [ :e |
 		
 circle addChild: minus.
 self addChild: circle.
-
+minus:= circle.
 ^circle
 
 
@@ -161,7 +176,7 @@ circle addEventHandlerOn: BlMouseDownEvent   do: [ :e |
 			 ].
 circle addChild: plus.
 self addChild: circle.
-
+plus:= circle.
 ^ circle.
    
 ]
@@ -182,9 +197,9 @@ MfInputElement >> installRawStyle [
 ]
 
 { #category : #accessing }
-MfInputElement >> minus [ 
+MfInputElement >> minus [
 
-^minus.
+	^minus.
 ]
 
 { #category : #'instance creation' }
@@ -213,9 +228,10 @@ MfInputElement >> openInput: anInput [
 
 ]
 
-{ #category : #'special characters' }
+{ #category : #accessing }
 MfInputElement >> plus [
-^plus.
+
+	^plus.
 ]
 
 { #category : #initialization }

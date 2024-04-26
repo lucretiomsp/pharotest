@@ -17,7 +17,7 @@ MfPatternElement >> addBarsToThePattern: nbBars [
 	changingX := 2.5.
 	(nbBars between: self min and: self max) ifTrue: [
 		1 to: nbBars do: [ :i |
-			bar := MfBar new.
+			bar := MfBarElement new.
 			bar transformDo: [ :t | t translateBy: changingX @ 0 ].
 			changingX := changingX + 35.
 			self addChild: bar ] ].
@@ -52,11 +52,10 @@ MfPatternElement >> initialize [
 	self addDrumInBar .
 ]
 
-{ #category : #initialization }
-MfPatternElement >> initializePatternSkin [
+{ #category : #skin }
+MfPatternElement >> installRawStyle [
 
-self newRawSkin .
-
+	super installRawStyle.
 ]
 
 { #category : #accessing }
@@ -92,6 +91,12 @@ MfPatternElement >> nbbars [
 MfPatternElement >> nbbars: someNbBars [
 
 nbbars:= someNbBars .
+]
+
+{ #category : #initialization }
+MfPatternElement >> newRawSkin [ 
+
+^ MfPatternElementSkin new.
 ]
 
 { #category : #action }

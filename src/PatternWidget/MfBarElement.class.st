@@ -1,5 +1,5 @@
 Class {
-	#name : #MfBar,
+	#name : #MfBarElement,
 	#superclass : #BlElement,
 	#instVars : [
 		'drum'
@@ -8,31 +8,31 @@ Class {
 }
 
 { #category : #action }
-MfBar >> assignDrum [
+MfBarElement >> assignDrum [
 	"Sets drum attribute to true"
 drum := true.
 ]
 
 { #category : #'visual properties' }
-MfBar >> backgroundPaint [ 
+MfBarElement >> backgroundPaint [ 
 	"Define the background for a bar"
 	^ Color white.
 ]
 
 { #category : #'visual properties' }
-MfBar >> barExtent [
+MfBarElement >> barExtent [
 	"Size of a bar"
 	^30@52.
 ]
 
 { #category : #accessing }
-MfBar >> drum [ 
+MfBarElement >> drum [ 
 
 ^drum.
 ]
 
 { #category : #initialization }
-MfBar >> initialize [ 
+MfBarElement >> initialize [ 
 
 	super initialize.
 	drum := false.
@@ -43,7 +43,7 @@ MfBar >> initialize [
 ]
 
 { #category : #removing }
-MfBar >> removeDrum [
+MfBarElement >> removeDrum [
 	"Sets drum attribute to false"
 drum := false.
 ]

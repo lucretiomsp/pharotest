@@ -14,7 +14,7 @@ Class {
 { #category : #initialization }
 MfTimerElement >> defaultBorder [ 
 
-^ BlBorder paint: Color black.
+^ BlBorder paint: Color lightOrange width:4 .
 ]
 
 { #category : #initialization }
@@ -82,6 +82,18 @@ tvalue constraintsDo: [ :c |
 self addChild: tvalue.
 
 ^tvalue
+]
+
+{ #category : #skin }
+MfTimerElement >> installRawStyle [ 
+
+	super installRawStyle .
+]
+
+{ #category : #'instance creation' }
+MfTimerElement >> newRawSkin [ 
+
+^ MfTimerElementSkin new.
 ]
 
 { #category : #'as yet unclassified' }

@@ -9,7 +9,7 @@ MfInputElementTest >> testEverythingIsInitializedCorrectly [
 
 | inputElem |
 "create instance of input"
-inputElem:= MfInputElement new.
+inputElem:= MfInputElement new default: 20.
 "Must have 4 childs : Value, both buttons and the input text"
 self assert: inputElem children size equals: 4. 
 self assert:  inputElem value equals: 20. "As default value defined in the code"
@@ -21,7 +21,7 @@ MfInputElementTest >> testSkinisInstalledCorrectly [
 
 | inputElem |
 "create instance of input"
-inputElem:= MfInputElement new.
+inputElem:= MfInputElement new default: 12.
 "input skin is nil"
 self assert: inputElem background paint equals: nil .
 inputElem openInput: inputElem. "Assign skin to input"
@@ -52,7 +52,7 @@ MfInputElementTest >> testValueUpdatedOnClick [
  
 | inputElem |
 
-inputElem:= MfInputElement new.
+inputElem:= MfInputElement new default:20.
 "we simulate click on minus button, default value is 20"
 BlSpace simulateClickOn: inputElem minus.
 "resulting value is 20-1"
