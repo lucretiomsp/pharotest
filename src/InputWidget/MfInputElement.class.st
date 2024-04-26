@@ -10,10 +10,6 @@ Class {
 	#category : #InputWidget
 }
 
-{ #category : #'as yet unclassified' }
-MfInputElement >> assignSkin [
-]
-
 { #category : #'visual properties' }
 MfInputElement >> backgroundPaint [ 
 	"Set the background for the element to black"
