@@ -77,7 +77,7 @@ MfTimerElement >> initializeTimerValue [
 { #category : #initialization }
 MfTimerElement >> initializeTimerValue: aValue [
 
-	timerValue := MfInputValue new.
+	timerValue := MfInputValueElement new.
 	timerValue text: aValue asString asRopedText.
 	timerValue text fontSize: 100.
 	timerValue text attributes:

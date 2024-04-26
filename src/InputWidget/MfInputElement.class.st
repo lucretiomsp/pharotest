@@ -96,7 +96,7 @@ MfInputElement >> initializeInputText [
 	"get the input text"
 | inputtext |
 
-inputtext := MfInputText new.
+inputtext := MfInputTextElement new.
 self addChild: inputtext.
 
 ^inputtext 
@@ -106,7 +106,7 @@ self addChild: inputtext.
 MfInputElement >> initializeInputValue [
 	"setting the default value to 20 and setting its attributes"
 
-inputValue := MfInputValue new.
+inputValue := MfInputValueElement new.
 inputValue text: default asString asRopedText .
 inputValue text attributes:  { (BlTextForegroundAttribute paint: Color white)}.
 inputValue text fontSize: 30.
@@ -232,7 +232,7 @@ MfInputElement >> plus [
 MfInputElement >> setInputValue: aValue [
 	"update the value by creating a new one having the value aValue passed as parameter"
 
-inputValue := MfInputValue new.
+inputValue := MfInputValueElement new.
 inputValue text: aValue asString asRopedText .
 inputValue text attributes:  { (BlTextForegroundAttribute paint: Color white)}.
 inputValue text fontSize: 30.

@@ -1,11 +1,11 @@
 Class {
-	#name : #MfInputText,
+	#name : #MfInputTextElement,
 	#superclass : #BlTextElement,
 	#category : #InputWidget
 }
 
 { #category : #initialization }
-MfInputText >> initialize [ 
+MfInputTextElement >> initialize [ 
 
 super initialize .
 self text: ('Input' asRopedText attributes:  { (BlTextForegroundAttribute paint: Color white)}).
@@ -17,14 +17,14 @@ self transformDo: [ :t |
 ]
 
 { #category : #accessing }
-MfInputText >> text [ 
+MfInputTextElement >> text [ 
 	"get the text of the input"
 
 ^text
 ]
 
 { #category : #accessing }
-MfInputText >> text: aText [
+MfInputTextElement >> text: aText [
 	"allow to set the text as aText"
 text:= aText .
 ]

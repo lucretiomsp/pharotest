@@ -1,11 +1,11 @@
 Class {
-	#name : #MfInputValue,
+	#name : #MfInputValueElement,
 	#superclass : #BlTextElement,
 	#category : #InputWidget
 }
 
 { #category : #initialization }
-MfInputValue >> initialize [ 
+MfInputValueElement >> initialize [ 
 
 super initialize .
 
