@@ -1,5 +1,5 @@
 Class {
-	#name : #TimerElementTest,
+	#name : #MfTimerElementTest,
 	#superclass : #TestCase,
 	#category : #TimerWidget
 }
