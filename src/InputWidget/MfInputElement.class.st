@@ -25,7 +25,7 @@ value > 0 ifTrue: [
 	value:= value -1.
  ].
 inputValue removeFromParent .
-inputValue:= self initializeInputValue: value asString.
+inputValue:= self setInputValue: value .
 
 
 ]
@@ -53,7 +53,7 @@ MfInputElement >> increaseInput [
 	"create an updated value added to the input elem"
 value := value + 1.
 inputValue removeFromParent .
-inputValue:= self initializeInputValue: value asString.
+inputValue:= self setInputValue: value.
 
 ]
 
@@ -64,10 +64,9 @@ super initialize .
 self geometry: self defaultGeometry.
 self size: self inputExtent .
 self layout: self defaultLayout.
-plus := self initializePlus.
-minus :=self initializeMinus.
-inputValue:= self initializeInputValue. 
-value := inputValue text asString asNumber.
+self initializePlus.
+self initializeMinus.
+self initializeInputValue. 
 self initializeInputText .
 
 
@@ -91,27 +90,15 @@ self addChild: inputtext.
 { #category : #initialization }
 MfInputElement >> initializeInputValue [
 	"setting the default value to 20 and setting its attributes"
-| ivalue|
-ivalue := MfInputValue new.
-ivalue  text: '20' asRopedText .
-ivalue text attributes:  { (BlTextForegroundAttribute paint: Color white)}.
-ivalue text fontSize: 30.
-self addChild: ivalue.
 
-^ivalue
-]
+inputValue := MfInputValue new.
+inputValue text: '20' asRopedText .
+inputValue text attributes:  { (BlTextForegroundAttribute paint: Color white)}.
+inputValue text fontSize: 30.
+self addChild: inputValue.
+value:= 20.
 
-{ #category : #initialization }
-MfInputElement >> initializeInputValue: aValue [
-	"update the value by creating a new one having the value aValue passed as parameter"
-| ivalue|
-ivalue := MfInputValue new.
-ivalue  text: aValue asRopedText .
-ivalue text attributes:  { (BlTextForegroundAttribute paint: Color white)}.
-ivalue text fontSize: 30.
-self addChild: ivalue.
 
-^ivalue
 ]
 
 { #category : #initialization }
@@ -229,6 +216,20 @@ MfInputElement >> openInput: anInput [
 { #category : #'special characters' }
 MfInputElement >> plus [
 ^plus.
+]
+
+{ #category : #initialization }
+MfInputElement >> setInputValue: aValue [
+	"update the value by creating a new one having the value aValue passed as parameter"
+
+inputValue := MfInputValue new.
+inputValue text: aValue asString asRopedText .
+inputValue text attributes:  { (BlTextForegroundAttribute paint: Color white)}.
+inputValue text fontSize: 30.
+self addChild: inputValue.
+value:= aValue.
+
+^inputValue
 ]
 
 { #category : #evaluating }

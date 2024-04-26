@@ -1,8 +1,11 @@
 Class {
 	#name : #MfTimerElement,
 	#superclass : #ToElement,
+	#instVars : [
+		'anim',
+		'timerValue'
+	],
 	#classVars : [
-		'timerValue',
 		'value'
 	],
 	#category : #TimerWidget
@@ -23,17 +26,15 @@ MfTimerElement >> defaultGeometry [
 { #category : #initialization }
 MfTimerElement >> initAnimation [ 
 
-	| anim |
-	
 anim:= BlAnimation new
 	duration: 1 seconds;
 	loops: value.
 self addEventHandlerOn:  BlMouseDownEvent do: [ :a |
 	anim addEventHandler: (BlEventHandler on: BlAnimationLoopDoneEvent do: [ :e |
 	self updateValue.
+	self background: Color random.
 	]).
  ].
-
 
 self addAnimation: anim.
 ]
