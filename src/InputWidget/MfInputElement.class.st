@@ -212,6 +212,7 @@ MfInputElement >> openInput: anInput [
 	anInput transformDo: [ :c | c translateBy: 250 @ 200 ].
 	space root addChild: anInput.
 	space toTheme: MfInputElementTheme new.
+	space applyAllSkinInstallers .
 	space show.
 	^ anInput
 ]

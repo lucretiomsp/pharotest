@@ -10,6 +10,6 @@ MfPatternExamples class >> exampleSimplePattern [
 <script>
 | patternelem |
 
-patternelem:= MfPatternElement new min:4; max:12; nbbars:12. 
+patternelem:= MfPatternElement new min: 4; max: 16; nbbars: 12. 
 patternelem openPattern: patternelem .
 ]

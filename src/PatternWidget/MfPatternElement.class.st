@@ -2,7 +2,10 @@ Class {
 	#name : #MfPatternElement,
 	#superclass : #ToElement,
 	#instVars : [
-		'nbOfBars'
+		'nbOfBars',
+		'max',
+		'min',
+		'nbbars'
 	],
 	#classVars : [
 		'max',
@@ -18,16 +21,16 @@ MfPatternElement >> addBarsToThePattern: nbBars [
 	
 	| bar changingX |
 	nbOfBars:= 0.
-	
 	changingX := 2.5.
-	(nbBars between: self min and: self max) ifTrue: [
+	(nbBars between: min and: max) ifTrue: [
 		nbOfBars := nbBars.
 		1 to: nbBars do: [ :i |
 			bar := MfBarElement new.
 			bar transformDo: [ :t | t translateBy: changingX @ 0 ].
 			changingX := changingX + 35.
 			self addChild: bar ] ].
-	self size: 35 * nbBars @ 60
+	self size: 35 * nbBars @ 60.
+	self addDrumInBar.
 ]
 
 { #category : #adding }
@@ -58,9 +61,8 @@ MfPatternElement >> initialize [
 	self size: self patternExtent.
 	self geometry: BlRectangleGeometry new.
 	self layout: BlFrameLayout new.
-	self addBarsToThePattern: self nbbars.
-	self addDrumInBar.
-	self defaultSkin: MfPatternElementSkin new
+	self defaultSkin: MfPatternElementSkin new.
+
 ]
 
 { #category : #skin }
@@ -78,7 +80,7 @@ MfPatternElement >> max [
 { #category : #accessing }
 MfPatternElement >> max: aMax [
 
-	max:=aMax.
+	max:= aMax.
 ]
 
 { #category : #accessing }
@@ -90,7 +92,7 @@ MfPatternElement >> min [
 { #category : #accessing }
 MfPatternElement >> min: aMin [
 
-	min:=aMin.
+	min:= aMin.
 ]
 
 { #category : #accessing }
@@ -106,8 +108,9 @@ MfPatternElement >> nbbars [
 
 { #category : #accessing }
 MfPatternElement >> nbbars: someNbBars [
-
+ 
 nbbars:= someNbBars .
+self addBarsToThePattern: nbbars.
 ]
 
 { #category : #initialization }
@@ -125,6 +128,7 @@ MfPatternElement >> openPattern: aPattern [
 	aPattern transformDo: [ :c | c translateBy: 180 @ 200 ].
 	space root addChild: aPattern.
 	space toTheme: MfPatternElementTheme new.
+	space applyAllSkinInstallers .
 	space show.
 	^ aPattern
 ]
