@@ -106,14 +106,13 @@ self addChild: inputtext.
 MfInputElement >> initializeInputValue [
 	"setting the default value to 20 and setting its attributes"
 
-inputValue := MfInputValueElement new.
-inputValue text: default asString asRopedText .
-inputValue text attributes:  { (BlTextForegroundAttribute paint: Color white)}.
-inputValue text fontSize: 30.
-self addChild: inputValue.
-value:= 20.
-
-
+	inputValue := MfInputValueElement new.
+	inputValue text: default asString asRopedText.
+	inputValue text attributes:
+		{ (BlTextForegroundAttribute paint: Color white) }.
+	inputValue text fontSize: 30.
+	self addChild: inputValue.
+	value := default.
 ]
 
 { #category : #initialization }
@@ -205,21 +204,16 @@ MfInputElement >> newRawSkin [
 { #category : #action }
 MfInputElement >> openInput: anInput [
 	"sets configuration to display the input element in a space"
+
 	| space |
 	space := BlSpace new.
 	anInput defaultSkin: MfInputElementSkin new.
-	space root
-		layout: BlFlowLayout horizontal.
-	anInput transformDo: [ :c |
-		c translateBy: 250@200
-		 ].
-	space root addChild: anInput  .
-	space toTheme: MfInputElementTheme new .
-	space applyAllSkinInstallers .
+	space root layout: BlFlowLayout horizontal.
+	anInput transformDo: [ :c | c translateBy: 250 @ 200 ].
+	space root addChild: anInput.
+	space toTheme: MfInputElementTheme new.
 	space show.
-	^ anInput 
-
-
+	^ anInput
 ]
 
 { #category : #accessing }

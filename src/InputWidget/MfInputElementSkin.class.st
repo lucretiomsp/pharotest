@@ -10,8 +10,11 @@ MfInputElementSkin >> installLookEvent: anEvent [
 
 	super installLookEvent: anEvent.
 	anEvent elementDo: [ :e |
-		e border: e defaultBorder.
-		e background: e backgroundPaint ]
+				e border: (BlBorder
+				 paint: (e valueOfTokenNamed: #'color-border')
+				 width: (e valueOfTokenNamed: #'line-width')).
+		e background: e backgroundPaint
+		 ]
 ]
 
 { #category : #'event handling' }
