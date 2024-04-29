@@ -27,7 +27,8 @@ And if you want to change the values of those properties to make your skin more 
 ## Implement Theme
 
 To create your own theme with your own values, you'll have to subclass ToRawTheme ( or ToBeeTheme ) and implement its class-sided method defaultTokenProperties to define the values of your properties.
-For example : ``` 
+For example : 
+``` 
 defaultTokenProperties 
 ^ super defaultTokenProperties , 
 {   (ToTokenProperty    name: #'background-color'    value: (Color lightGreen)). }
@@ -38,7 +39,8 @@ This will set the token property "background-color" to value "lightGreen"
 
 In this case : Imagine you've not defined the border and the background of your widget, well you can configurate it in the installLookEvent: 
 
-```installLookEvent: anEvent
+```
+installLookEvent: anEvent
 	"when installing the skin, changes the properties of widget mentionned down here"
 
 	super installLookEvent: anEvent.
@@ -46,7 +48,8 @@ In this case : Imagine you've not defined the border and the background of your 
 		e border: (BlBorder
 				 paint: (e valueOfTokenNamed: #'color-border')
 				 width: (e valueOfTokenNamed: #'line-width')).
-		e background: e backgroundPaint ]```
+		e background: e backgroundPaint ]
+```
 Those tokens can be defined in your theme as I explained right before.
 
 ## Last things to do
