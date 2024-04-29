@@ -15,16 +15,3 @@ self constraintsDo: [ :c |
 self transformDo: [ :t |
 	t translateBy: 0@10].
 ]
-
-{ #category : #accessing }
-MfInputTextElement >> text [ 
-	"get the text of the input"
-
-^text
-]
-
-{ #category : #accessing }
-MfInputTextElement >> text: aText [
-	"allow to set the text as aText"
-text:= aText .
-]

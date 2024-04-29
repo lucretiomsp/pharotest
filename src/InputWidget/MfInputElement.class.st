@@ -24,13 +24,8 @@ MfInputElement >> backgroundPaint [
 MfInputElement >> decreaseInput [
 	"Check if the value is not 0, then create a new updated value"
 
-value > 0 ifTrue: [ 
-	value:= value -1.
- ].
-inputValue removeFromParent .
-inputValue:= self setInputValue: value .
-
-
+	value > 0 ifTrue: [ value := value - 1 ].
+	inputValue := self setInputValue: value
 ]
 
 { #category : #accessing }
@@ -64,12 +59,11 @@ MfInputElement >> defaultLayout [
 ]
 
 { #category : #action }
-MfInputElement >> increaseInput [ 
+MfInputElement >> increaseInput [
 	"create an updated value added to the input elem"
-value := value + 1.
-inputValue removeFromParent .
-inputValue:= self setInputValue: value.
 
+	value := value + 1.
+	inputValue := self setInputValue: value
 ]
 
 { #category : #initialization }
@@ -137,7 +131,7 @@ MfInputElement >> initializeMinus [
 		c frame vertical alignCenter ].
 	circle
 		addEventHandlerOn: BlMouseDownEvent
-		do: [ :e | self decreaseInput ].
+		do: [ :e | self decreaseInput].
 
 	circle addChild: minus.
 	self addChild: circle.
@@ -227,14 +221,13 @@ MfInputElement >> plus [
 MfInputElement >> setInputValue: aValue [
 	"update the value by creating a new one having the value aValue passed as parameter"
 
-inputValue := MfInputValueElement new.
-inputValue text: aValue asString asRopedText .
-inputValue text attributes:  { (BlTextForegroundAttribute paint: Color white)}.
-inputValue text fontSize: 30.
-self addChild: inputValue.
-value:= aValue.
+	inputValue text: aValue asString asRopedText.
+	inputValue text attributes:
+		{ (BlTextForegroundAttribute paint: Color white) }.
+	inputValue text fontSize: 30.
+	value := aValue.
 
-^inputValue
+	^ inputValue
 ]
 
 { #category : #evaluating }
