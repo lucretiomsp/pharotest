@@ -76,12 +76,12 @@ MfFractalCircleElement >> setValue: aValue [
 { #category : #'as yet unclassified' }
 MfFractalCircleElement >> updateCircles [
 
-	self children isEmpty ifTrue: [ self removeChildren ].
+	currentX := 300.
+	currentY := 300.
 	1 to: value do: [ :i |
 		currentX := currentX - 5.
 		currentY := currentY - 5.
 		self createCircle: currentX y: currentY ].
-	self createCircle: currentX y: currentY
 ]
 
 { #category : #evaluating }
