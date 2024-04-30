@@ -27,7 +27,7 @@ MfStepElement >> initialize [
 	instrument := false.
 	self size: self stepExtent.
 	self background: self backgroundPaint.
-	self constraintsDo: [ :e | e frame vertical alignCenter ]
+	self constraintsDo: [ :e | e frame vertical alignCenter ].
 ]
 
 { #category : #accessing }
