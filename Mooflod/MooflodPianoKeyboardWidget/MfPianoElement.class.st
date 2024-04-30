@@ -1,31 +1,39 @@
 Class {
-	#name : #MfPiano,
+	#name : #MfPianoElement,
 	#superclass : #BlElement,
+	#instVars : [
+		'whiteKeyColor',
+		'blackKeyColor',
+		'nbOctaves'
+	],
 	#category : #MooflodPianoKeyboardWidget
 }
 
-{ #category : #adding }
-MfPiano >> addNotesToPiano [
-]
-
 { #category : #'visual properties' }
-MfPiano >> backgroundPaint [ 
+MfPianoElement >> backgroundPaint [ 
 
 	^ Color black.
 ]
 
+{ #category : #'simple keyboard' }
+MfPianoElement >> buildKeyboard [
+]
+
 { #category : #initialization }
-MfPiano >> initialize [
+MfPianoElement >> initialize [
+	"initialize the state of the receiver"
 
 	super initialize.
-	self size: self pianoExtent.
-	self background: self backgroundPaint.
-	self geometry: BlRectangleGeometry new.
-	self layout: BlFrameLayout new.
+	""
+
+	whiteKeyColor := Color gray: 0.95.
+	blackKeyColor := Color black.
+	nbOctaves:= 2.
+	self buildKeyboard.
 ]
 
 { #category : #'as yet unclassified' }
-MfPiano >> openPiano: aPiano [
+MfPianoElement >> openPiano: aPiano [
 	| space |
 	space := BlSpace new.
 	space root
@@ -43,7 +51,7 @@ MfPiano >> openPiano: aPiano [
 ]
 
 { #category : #'as yet unclassified' }
-MfPiano >> pianoExtent [
+MfPianoElement >> pianoExtent [
 
 	^400@160.
 ]
