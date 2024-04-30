@@ -15,14 +15,13 @@ MfPiano >> backgroundPaint [
 ]
 
 { #category : #initialization }
-MfPiano >> initialize [ 
+MfPiano >> initialize [
 
 	super initialize.
-	self size: self pianoExtent .
-	self background: self backgroundPaint .
-	self geometry: BlRectangle new.
+	self size: self pianoExtent.
+	self background: self backgroundPaint.
+	self geometry: BlRectangleGeometry new.
 	self layout: BlFrameLayout new.
-	self addNotestoPiano .
 ]
 
 { #category : #'as yet unclassified' }

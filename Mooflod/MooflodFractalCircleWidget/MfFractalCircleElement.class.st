@@ -11,23 +11,17 @@ Class {
 
 { #category : #'as yet unclassified' }
 MfFractalCircleElement >> circleExtent [
-	currentX := 200.
-	currentY:= 200.
-	^ 200 @ 200
+
+	currentX := 300.
+	currentY := 300.
+	^ 300 @ 300
 ]
 
 { #category : #'as yet unclassified' }
 MfFractalCircleElement >> createCircle: x y: anY [
 
 	| c |
-	c := ToElement new.
-	c geometry: BlCircleGeometry new.
-	c size: x@anY.
-	c border: (BlBorder paint: Color black).
-	c width: 3.
-	c constraintsDo: [ :e |
-		e frame vertical alignCenter.
-		e frame horizontal alignCenter ].
+	c := MfCircleElement new size: x @ anY.
 	self addChild: c
 ]
 
@@ -45,9 +39,7 @@ MfFractalCircleElement >> currentY [
 { #category : #initialization }
 MfFractalCircleElement >> defaultGeometry [
 
-	^ BlCircleGeometry new
-		  matchExtent: self extent.
-		  
+	^ BlCircleGeometry new matchExtent: self extent.
 ]
 
 { #category : #initialization }
@@ -67,7 +59,7 @@ MfFractalCircleElement >> openFractalCircle: aCircle [
 	| space |
 	space := BlSpace new.
 	space root layout: BlFlowLayout horizontal.
-	aCircle transformDo: [ :c | c translateBy: 250 @ 150 ].
+	aCircle transformDo: [ :c | c translateBy: 200 @ 150 ].
 	space toTheme: MfFractalCircleElementTheme new.
 	space root addChild: aCircle.
 	space show.
@@ -84,10 +76,11 @@ MfFractalCircleElement >> setValue: aValue [
 { #category : #'as yet unclassified' }
 MfFractalCircleElement >> updateCircles [
 
-	currentX := currentX - 5.
-	currentY := currentY - 5.
 	self children isEmpty ifTrue: [ self removeChildren ].
-	1 to: value do: [ :i | self createCircle: currentX y: currentY ].
+	1 to: value do: [ :i |
+		currentX := currentX - 5.
+		currentY := currentY - 5.
+		self createCircle: currentX y: currentY ].
 	self createCircle: currentX y: currentY
 ]
 
