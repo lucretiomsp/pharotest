@@ -12,7 +12,6 @@ MfTimerElementSkin >> installLookEvent: anEvent [
 	anEvent elementDo: [ :e |
 		e geometry: e defaultGeometry.
 		e size: 300 @ 300.
-		e border: e defaultBorder.
 		e background: e backgroundPaint ]
 ]
 

@@ -37,7 +37,8 @@ MfInputElement >> default [
 { #category : #accessing }
 MfInputElement >> default: aValue [
 
-default:= aValue .
+	default := aValue.
+	self initializeInputValue .
 ]
 
 { #category : #initialization }
@@ -67,22 +68,15 @@ MfInputElement >> increaseInput [
 ]
 
 { #category : #initialization }
-MfInputElement >> initialize [ 
+MfInputElement >> initialize [
 
-super initialize .
-self geometry: self defaultGeometry.
-self size: self inputExtent .
-self layout: self defaultLayout.
-self initializePlus.
-self initializeMinus.
-self initializeInputValue. 
-self initializeInputText .
-
-
-
-
-
-
+	super initialize.
+	self geometry: self defaultGeometry.
+	self size: self inputExtent.
+	self layout: self defaultLayout.
+	self initializePlus.
+	self initializeMinus.
+	self initializeInputText
 ]
 
 { #category : #initialization }

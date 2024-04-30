@@ -3,7 +3,10 @@ Class {
 	#superclass : #ToElement,
 	#instVars : [
 		'anim',
-		'timerValue'
+		'timerValue',
+		'annulus',
+		'angle',
+		'currentAngle'
 	],
 	#classVars : [
 		'value'
@@ -17,22 +20,31 @@ MfTimerElement >> anim [
 	^ anim.
 ]
 
+{ #category : #'as yet unclassified' }
+MfTimerElement >> annulusGeometry [
+
+	^ BlAnnulusSectorGeometry new
+		  startAngle: 0;
+		  endAngle: 360;
+		  innerRadius: 0.865
+]
+
 { #category : #'visual properties' }
 MfTimerElement >> backgroundPaint [ 
 
 	^ Color black.
 ]
 
-{ #category : #initialization }
-MfTimerElement >> defaultBorder [ 
+{ #category : #accessing }
+MfTimerElement >> currentAngle [
 
-^ BlBorder paint: Color lightOrange width:4 .
+^currentAngle .
 ]
 
 { #category : #initialization }
-MfTimerElement >> defaultGeometry [ 	
+MfTimerElement >> defaultGeometry [
 
-^BlCircleGeometry new matchExtent: self extent
+	^ BlCircleGeometry new matchExtent: self extent 
 ]
 
 { #category : #initialization }
@@ -45,6 +57,8 @@ MfTimerElement >> initAnimation [
 		anim addEventHandler: (BlEventHandler
 				 on: BlAnimationLoopDoneEvent
 				 do: [ :e |
+					 currentAngle := currentAngle - angle.
+					 self updateAnnulusAngle: currentAngle .
 					 self updateValue.
 					 self background: Color random ]) ].
 
@@ -56,7 +70,19 @@ MfTimerElement >> initialize [
 
 	super initialize.
 	self initAnimation.
-   self initializeTimerValue.
+	self initializeAnnulus
+]
+
+{ #category : #initialization }
+MfTimerElement >> initializeAnnulus [
+
+	annulus := BlElement new background: Color lightOrange.
+	annulus size: 300 @ 300.
+	annulus geometry: self annulusGeometry.
+	annulus constraintsDo: [ :c |
+		c frame horizontal alignCenter.
+		c frame vertical alignCenter ].
+	self addChild: annulus
 ]
 
 { #category : #initialization }
@@ -64,24 +90,11 @@ MfTimerElement >> initializeTimerValue [
 
 	timerValue := BlTextElement new.
 	timerValue text: value asString asRopedText.
+	angle := 360 / value.
+	currentAngle:= 360.
 	timerValue text fontSize: 100.
 	timerValue text attributes:
-		{ (BlTextForegroundAttribute paint: Color lightOrange ) }.
-	timerValue constraintsDo: [ :c |
-		c frame horizontal alignCenter.
-		c frame vertical alignCenter ].
-
-	self addChild: timerValue
-]
-
-{ #category : #initialization }
-MfTimerElement >> initializeTimerValue: aValue [
-
-	timerValue := MfInputValueElement new.
-	timerValue text: aValue asString asRopedText.
-	timerValue text fontSize: 100.
-	timerValue text attributes:
-		{ (BlTextForegroundAttribute paint: Color lightOrange ) }.
+		{ (BlTextForegroundAttribute paint: Color lightOrange) }.
 	timerValue constraintsDo: [ :c |
 		c frame horizontal alignCenter.
 		c frame vertical alignCenter ].
@@ -115,10 +128,34 @@ MfTimerElement >> openTimer: aTimer [
 	^ aTimer
 ]
 
+{ #category : #initialization }
+MfTimerElement >> setTimerValue: aValue [
+
+	timerValue := MfInputValueElement new.
+	timerValue text: aValue asString asRopedText.
+	timerValue text fontSize: 100.
+	timerValue text attributes:
+		{ (BlTextForegroundAttribute paint: Color lightOrange ) }.
+	timerValue constraintsDo: [ :c |
+		c frame horizontal alignCenter.
+		c frame vertical alignCenter ].
+
+	self addChild: timerValue
+]
+
 { #category : #accessing }
 MfTimerElement >> timerValue [
 
 ^timerValue
+]
+
+{ #category : #'as yet unclassified' }
+MfTimerElement >> updateAnnulusAngle: newAngle [
+
+	annulus geometry: (BlAnnulusSectorGeometry new
+			 startAngle: 0;
+			 endAngle: newAngle;
+			 innerRadius: 0.865)
 ]
 
 { #category : #protocol }
@@ -126,7 +163,7 @@ MfTimerElement >> updateValue [
 
 	value := value - 1.
 	timerValue removeFromParent.
-	self initializeTimerValue: value
+	self setTimerValue: value
 ]
 
 { #category : #evaluating }
@@ -137,5 +174,6 @@ MfTimerElement >> value [
 { #category : #accessing }
 MfTimerElement >> value: aValue [
 
-value:= aValue.
+	value := aValue.
+	self initializeTimerValue .
 ]
