@@ -11,5 +11,5 @@ Class {
 ManifestPatternWidget class >> ruleEqualsTrueRuleV1FalsePositive [
 
 	<ignoreForCoverage>
-	^ #(#(#(#RGMethodDefinition #(#MfPatternElement #addDrumInBar #false)) #'2024-04-23T13:57:11.533133+02:00') )
+	^ #(#(#(#RGMethodDefinition #(#MfPatternElement #addInstrumentToStep #false)) #'2024-04-23T13:57:11.533133+02:00') )
 ]

@@ -35,16 +35,12 @@ self assert: inputElem background paint color equals: Color black .
 { #category : #tests }
 MfInputElementTest >> testValueCantBeNegative [
 
-| inputElem | 
-
-inputElem:= MfInputElement new.
-"changing the value assigned for input with a set method"
-inputElem setInputValue: 0.
-"we simulate a click on minus button"
-BlSpace simulateClickOn: inputElem minus.
-"the minimum value is 0, so didn't change"
-self assert: inputElem value equals: 0.
-
+	| inputElem |
+	inputElem := MfInputElement new default: 0.
+	"we simulate a click on minus button"
+	BlSpace simulateClickOn: inputElem minus.
+	"the minimum value is 0, so didn't change"
+	self assert: inputElem value equals: 0
 ]
 
 { #category : #tests }

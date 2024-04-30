@@ -2,50 +2,47 @@ Class {
 	#name : #MfPatternElement,
 	#superclass : #ToElement,
 	#instVars : [
-		'nbOfBars',
-		'max',
-		'min',
-		'nbbars'
+		'nbOfSteps'
 	],
 	#classVars : [
 		'max',
 		'min',
-		'nbbars'
+		'nbsteps'
 	],
 	#category : #PatternWidget
 }
 
 { #category : #adding }
-MfPatternElement >> addBarsToThePattern: nbBars [
-	"Add all bars element in the pattern to display them"
-	
-	| bar changingX |
-	nbOfBars:= 0.
-	changingX := 2.5.
-	(nbBars between: min and: max) ifTrue: [
-		nbOfBars := nbBars.
-		1 to: nbBars do: [ :i |
-			bar := MfBarElement new.
-			bar transformDo: [ :t | t translateBy: changingX @ 0 ].
-			changingX := changingX + 35.
-			self addChild: bar ] ].
-	self size: 35 * nbBars @ 60.
-	self addDrumInBar.
-]
-
-{ #category : #adding }
-MfPatternElement >> addDrumInBar [
+MfPatternElement >> addInstrumentToStep [
 	"Change the value of the drum attribute for the bar clicked, and update his color for visualization undestanding"
 
 	self childrenDo: [ :child |
 		child addEventHandlerOn: BlMouseDownEvent do: [ :evt |
-			child drum not
+			child instrument not
 				ifTrue: [
 					child background: Color black.
-					child assignDrum ]
+					child assignInstrument  ]
 				ifFalse: [
 					child background: Color white.
-					child removeDrum ] ] ]
+					child removeInstrument  ] ] ]
+]
+
+{ #category : #adding }
+MfPatternElement >> addStepsToThePattern: nbSteps [
+	"Add all bars element in the pattern to display them"
+
+	| step changingX |
+	nbOfSteps := 0.
+	changingX := 2.5.
+	(nbSteps between: min and: max) ifTrue: [
+		nbOfSteps := nbSteps.
+		1 to: nbSteps do: [ :i |
+			step := MfStepElement new.
+			step transformDo: [ :t | t translateBy: changingX @ 0 ].
+			changingX := changingX + 35.
+			self addChild: step ] ].
+	self size: 35 * nbSteps @ 60.
+	self addInstrumentToStep
 ]
 
 { #category : #'visual properties' }
@@ -96,21 +93,22 @@ MfPatternElement >> min: aMin [
 ]
 
 { #category : #accessing }
-MfPatternElement >> nbOfBars [
+MfPatternElement >> nbOfSteps [
 
-^nbOfBars 
+	^ nbOfSteps
 ]
 
 { #category : #accessing }
-MfPatternElement >> nbbars [		
-	^nbbars.
+MfPatternElement >> nbsteps [
+
+	^ nbsteps
 ]
 
 { #category : #accessing }
-MfPatternElement >> nbbars: someNbBars [
- 
-nbbars:= someNbBars .
-self addBarsToThePattern: nbbars.
+MfPatternElement >> nbsteps: someNbSteps [
+
+	nbsteps := someNbSteps.
+	self addStepsToThePattern: nbsteps
 ]
 
 { #category : #initialization }
