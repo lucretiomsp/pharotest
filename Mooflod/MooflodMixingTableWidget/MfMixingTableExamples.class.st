@@ -12,5 +12,7 @@ MfMixingTableExamples class >> exampleSimpleMixingTable [
 	t := MfMixingTableElement new
 		     nbButtons: 10;
 		     nbButtonPerRow: 5.
+	t redefineKeys: #( A S D F G H J K L ).
+	t keymap.
 	t openMixingTable: t
 ]

@@ -24,25 +24,11 @@ MfMixingTableElement >> defaultGeometry [
 ]
 
 { #category : #'as yet unclassified' }
-MfMixingTableElement >> initButtons [
-
-	| button |
-	1 to: nbButtons do: [ :b |
-		button := MfMixingButtonElement new.
-		self addChild: button ].
-	self childrenDo: [ :child |
-		child
-			addEventHandlerOn: BlMouseDownEvent
-			do: [ :c | child background: Color random ] ].
-		self initEventListeners 
-]
-
-{ #category : #'as yet unclassified' }
 MfMixingTableElement >> initEventListeners [
 
 	self addEventHandlerOn: BlKeyDownEvent do: [ :anEvent |
 		keymap
-			at: anEvent key 
+			at: anEvent key name
 			ifPresent: [ :aButton | aButton background: Color random ] ].
 	self requestFocus
 ]
@@ -51,10 +37,8 @@ MfMixingTableElement >> initEventListeners [
 MfMixingTableElement >> initKeys [
 
 	| keys |
-	keys := #( Q W E R T Y U I O P ) collect: [ :each |
-		           KeyboardKey perform: each ].
-	keys do: [ :eachKey |
-		self addButton: MfMixingButtonElement new key: eachKey ].
+	keys := #( Q W E R T Y U I O P ). keys do: [ :eachKey |
+		        self addButton: MfMixingButtonElement new key: eachKey ].
 	self initEventListeners
 ]
 
@@ -103,7 +87,6 @@ MfMixingTableElement >> nbButtons [
 MfMixingTableElement >> nbButtons: buttons [
 
 	nbButtons := buttons.
-	"self initButtons"
 	self initKeys
 ]
 
@@ -119,6 +102,16 @@ MfMixingTableElement >> openMixingTable: aTable [
 	space applyAllSkinInstallers.
 	space show.
 	^ aTable
+]
+
+{ #category : #'as yet unclassified' }
+MfMixingTableElement >> redefineKeys: keys [
+
+	| val |
+	val := keymap values.
+	keymap := Dictionary new.
+	keys do: [ :eachKey | val do: [ :z | keymap at: eachKey put: z ] ].
+	self initEventListeners
 ]
 
 { #category : #'as yet unclassified' }
