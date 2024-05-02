@@ -10,7 +10,7 @@ MfMixingTableExamples class >> exampleSimpleMixingTable [
 	<script>
 	| t |
 	t := MfMixingTableElement new
-		     nbButtons: 20;
-		     nbRows: 5.
+		     nbButtons: 10;
+		     nbButtonPerRow: 5.
 	t openMixingTable: t
 ]

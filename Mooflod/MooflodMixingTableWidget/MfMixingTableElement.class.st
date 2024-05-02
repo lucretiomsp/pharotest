@@ -2,8 +2,9 @@ Class {
 	#name : #MfMixingTableElement,
 	#superclass : #ToElement,
 	#classVars : [
-		'nbButtons',
-		'nbRows'
+		'keymap',
+		'nbButtonPerRow',
+		'nbButtons'
 	],
 	#category : #MooflodMixingTableWidget
 }
@@ -24,7 +25,26 @@ MfMixingTableElement >> initButtons [
 	self childrenDo: [ :child |
 		child
 			addEventHandlerOn: BlMouseDownEvent
-			do: [ :c | child background: Color random ] ]
+			do: [ :c | child background: Color random ] ].
+		self initEventListeners 
+]
+
+{ #category : #'as yet unclassified' }
+MfMixingTableElement >> initEventListeners [
+
+self addEventHandlerOn: BlKeyDownEvent do: [ :anEvent |
+		keymap
+			at: anEvent key
+			ifPresent: [ :aButton |
+			aButton background: Color veryVeryLightGray ]
+			 ].
+	
+]
+
+{ #category : #accessing }
+MfMixingTableElement >> initKeys [
+
+	keymap := #( Q W E R T Y U I O P ).
 ]
 
 { #category : #initialization }
@@ -41,6 +61,26 @@ MfMixingTableElement >> initialize [
 		aLayoutConstraints vertical fitContent ]
 ]
 
+{ #category : #accessing }
+MfMixingTableElement >> keymap [
+
+
+^keymap
+]
+
+{ #category : #'as yet unclassified' }
+MfMixingTableElement >> nbButtonPerRow [
+
+	^ nbButtonPerRow 
+]
+
+{ #category : #'as yet unclassified' }
+MfMixingTableElement >> nbButtonPerRow: rows [
+
+	nbButtonPerRow  := rows.
+	self layout columnCount: nbButtonPerRow 
+]
+
 { #category : #'as yet unclassified' }
 MfMixingTableElement >> nbButtons [
 
@@ -51,20 +91,7 @@ MfMixingTableElement >> nbButtons [
 MfMixingTableElement >> nbButtons: buttons [
 
 	nbButtons := buttons.
-	self initButtons.
-]
-
-{ #category : #'as yet unclassified' }
-MfMixingTableElement >> nbRows [
-
-^nbRows
-]
-
-{ #category : #'as yet unclassified' }
-MfMixingTableElement >> nbRows: rows [
-
-	nbRows := rows.
-		self layout columnCount: nbRows.
+	self initButtons
 ]
 
 { #category : #'as yet unclassified' }
