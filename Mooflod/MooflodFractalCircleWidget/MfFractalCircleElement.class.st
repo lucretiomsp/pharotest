@@ -12,9 +12,7 @@ Class {
 { #category : #'as yet unclassified' }
 MfFractalCircleElement >> circleExtent [
 
-	currentX := 300.
-	currentY := 300.
-	^ 300 @ 300
+	^ 390 @ 390
 ]
 
 { #category : #'as yet unclassified' }
@@ -59,7 +57,7 @@ MfFractalCircleElement >> openFractalCircle: aCircle [
 	| space |
 	space := BlSpace new.
 	space root layout: BlFlowLayout horizontal.
-	aCircle transformDo: [ :c | c translateBy: 200 @ 150 ].
+	"aCircle transformDo: [ :c | c translateBy: 200 @ 150 ]."
 	space toTheme: MfFractalCircleElementTheme new.
 	space root addChild: aCircle.
 	space show.
@@ -76,12 +74,12 @@ MfFractalCircleElement >> setValue: aValue [
 { #category : #'as yet unclassified' }
 MfFractalCircleElement >> updateCircles [
 
-	currentX := 300.
-	currentY := 300.
-	1 to: value do: [ :i |
-		currentX := currentX - 5.
-		currentY := currentY - 5.
-		self createCircle: currentX y: currentY ].
+	currentX := 390.
+	currentY := 390.
+	1 to: value / 4 do: [ :i |
+		currentX := currentX - 15.
+		currentY := currentY - 15.
+		self createCircle: currentX y: currentY ]
 ]
 
 { #category : #evaluating }

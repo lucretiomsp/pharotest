@@ -9,8 +9,7 @@ MfFractalCircleExamples class >> exampleSimpleFractalCircle [
 
 	<script>
 	| c |
-	c:= MfFractalCircleElement new.
-	c setValue: 10.
-	c openFractalCircle: c.
-	
+	c := MfFractalCircleElement new.
+	c setValue: 100.
+	c openFractalCircle: c
 ]
