@@ -1,6 +1,6 @@
 Class {
 	#name : #MfKeyboardElement,
-	#superclass : #BlElement,
+	#superclass : #ToElement,
 	#instVars : [
 		'keymap'
 	],

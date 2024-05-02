@@ -9,6 +9,14 @@ Class {
 	#category : #MooflodMixingTableWidget
 }
 
+{ #category : #adding }
+MfMixingTableElement >> addButton: anElement key: aKey [
+	"add the key passed as parameter to the key dictionnary"
+
+	keymap at: aKey put: anElement.
+	self addChild: anElement
+]
+
 { #category : #initialization }
 MfMixingTableElement >> defaultGeometry [
 ^ BlRectangleGeometry new
@@ -32,19 +40,22 @@ MfMixingTableElement >> initButtons [
 { #category : #'as yet unclassified' }
 MfMixingTableElement >> initEventListeners [
 
-self addEventHandlerOn: BlKeyDownEvent do: [ :anEvent |
+	self addEventHandlerOn: BlKeyDownEvent do: [ :anEvent |
 		keymap
-			at: anEvent key
-			ifPresent: [ :aButton |
-			aButton background: Color veryVeryLightGray ]
-			 ].
-	
+			at: anEvent key 
+			ifPresent: [ :aButton | aButton background: Color random ] ].
+	self requestFocus
 ]
 
 { #category : #accessing }
 MfMixingTableElement >> initKeys [
 
-	keymap := #( Q W E R T Y U I O P ).
+	| keys |
+	keys := #( Q W E R T Y U I O P ) collect: [ :each |
+		           KeyboardKey perform: each ].
+	keys do: [ :eachKey |
+		self addButton: MfMixingButtonElement new key: eachKey ].
+	self initEventListeners
 ]
 
 { #category : #initialization }
@@ -53,6 +64,7 @@ MfMixingTableElement >> initialize [
 	super initialize.
 	self geometry: self defaultGeometry.
 	self size: self tableExtent.
+	keymap:= Dictionary new.
 	self background: Color black.
 	self border: (BlBorder paint: Color blue width: 2).
 	self layout: (BlGridLayout horizontal cellSpacing: 20).
@@ -91,7 +103,8 @@ MfMixingTableElement >> nbButtons [
 MfMixingTableElement >> nbButtons: buttons [
 
 	nbButtons := buttons.
-	self initButtons
+	"self initButtons"
+	self initKeys
 ]
 
 { #category : #'as yet unclassified' }
