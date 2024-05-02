@@ -9,6 +9,6 @@ MfTimerExamples class >> exampleSimpleTimer [
 
 	<script>
 	| timer |
-	timer := MfTimerElement new value: 30.
+	timer := MfTimerElement new value: 10.
 	timer openTimer: timer
 ]

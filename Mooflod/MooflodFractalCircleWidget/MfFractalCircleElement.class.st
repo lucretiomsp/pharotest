@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'currentX',
 		'currentY',
-		'value'
+		'value',
+		'nbOfChilds'
 	],
 	#category : #MooflodFractalCircleWidget
 }
@@ -51,13 +52,19 @@ MfFractalCircleElement >> initialize [
 	value := 0
 ]
 
+{ #category : #accessing }
+MfFractalCircleElement >> nbOfChilds [
+
+^nbOfChilds 
+]
+
 { #category : #'as yet unclassified' }
 MfFractalCircleElement >> openFractalCircle: aCircle [
 
 	| space |
 	space := BlSpace new.
 	space root layout: BlFlowLayout horizontal.
-	"aCircle transformDo: [ :c | c translateBy: 200 @ 150 ]."
+	aCircle transformDo: [ :c | c translateBy: 200 @ 150 ].
 	space toTheme: MfFractalCircleElementTheme new.
 	space root addChild: aCircle.
 	space show.
@@ -67,8 +74,10 @@ MfFractalCircleElement >> openFractalCircle: aCircle [
 { #category : #'as yet unclassified' }
 MfFractalCircleElement >> setValue: aValue [
 
-	(aValue between: 0 and: 100) ifTrue: [ self value: aValue ].
-	self updateCircles.
+	(aValue between: 0 and: 100) ifTrue: [ self value: aValue ]
+	ifFalse: [ self value: 100 ].
+	nbOfChilds := value / 4.
+	self updateCircles
 ]
 
 { #category : #'as yet unclassified' }
