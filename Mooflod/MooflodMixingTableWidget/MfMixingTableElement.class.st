@@ -107,10 +107,13 @@ MfMixingTableElement >> openMixingTable: aTable [
 { #category : #'as yet unclassified' }
 MfMixingTableElement >> redefineKeys: keys [
 
-	| val |
-	val := keymap values.
+	| v |
+	v := keymap values.
 	keymap := Dictionary new.
-	keys do: [ :eachKey | val do: [ :z | keymap at: eachKey put: z ] ].
+		keys withIndexDo: [ :key :index |
+			| elem |
+			elem := v at: index.
+			keymap at: key put: elem ] .
 	self initEventListeners
 ]
 
