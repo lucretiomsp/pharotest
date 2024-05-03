@@ -1,11 +1,11 @@
 Class {
-	#name : #Mf3DFilledSquareElement,
+	#name : #Mf3DEmptySquareElement,
 	#superclass : #ToElement,
 	#category : #'Mooflod-3DFilledSquare'
 }
 
 { #category : #initialization }
-Mf3DFilledSquareElement >> defaultGeometry [ 
+Mf3DEmptySquareElement >> defaultGeometry [ 
 
        ^BlSquareGeometry new
         
@@ -13,7 +13,7 @@ Mf3DFilledSquareElement >> defaultGeometry [
 ]
 
 { #category : #'initialization - private' }
-Mf3DFilledSquareElement >> initBottomLeft [
+Mf3DEmptySquareElement >> initBottomLeft [
 |bll|
 
 	bll := ToElement new.
@@ -24,7 +24,7 @@ Mf3DFilledSquareElement >> initBottomLeft [
 ]
 
 { #category : #'initialization - private' }
-Mf3DFilledSquareElement >> initBottomRight [
+Mf3DEmptySquareElement >> initBottomRight [
 
 	| brl |
 	brl := ToElement new.
@@ -35,7 +35,7 @@ Mf3DFilledSquareElement >> initBottomRight [
 ]
 
 { #category : #'as yet unclassified' }
-Mf3DFilledSquareElement >> initLines [
+Mf3DEmptySquareElement >> initLines [
 
 	self initBottomLeft .
 	self initBottomLeft .
@@ -45,7 +45,7 @@ Mf3DFilledSquareElement >> initLines [
 ]
 
 { #category : #'initialization - private' }
-Mf3DFilledSquareElement >> initTopLeft [
+Mf3DEmptySquareElement >> initTopLeft [
 
 	| tll |
 	tll := ToElement new.
@@ -56,7 +56,7 @@ Mf3DFilledSquareElement >> initTopLeft [
 ]
 
 { #category : #'initialization - private' }
-Mf3DFilledSquareElement >> initTopRight [
+Mf3DEmptySquareElement >> initTopRight [
 
 	| tlr |
 	tlr := ToElement new.
@@ -67,7 +67,7 @@ Mf3DFilledSquareElement >> initTopRight [
 ]
 
 { #category : #initialization }
-Mf3DFilledSquareElement >> initialize [
+Mf3DEmptySquareElement >> initialize [
 
 	super initialize.
 	self geometry: self defaultGeometry.
@@ -80,13 +80,13 @@ Mf3DFilledSquareElement >> initialize [
 ]
 
 { #category : #'as yet unclassified' }
-Mf3DFilledSquareElement >> openSquare: aSquare [
+Mf3DEmptySquareElement >> openSquare: aSquare [
 
 	| space |
 	space := BlSpace new.
 	space root layout: BlFlowLayout horizontal.
 
-	space toTheme: Mf3DFilledSquareTheme new.
+	space toTheme: Mf3DEmptySquareTheme new.
 
 	space root addChild: self initBottomRight.
 	space root addChild: self initTopLeft.
@@ -102,7 +102,7 @@ Mf3DFilledSquareElement >> openSquare: aSquare [
 ]
 
 { #category : #'as yet unclassified' }
-Mf3DFilledSquareElement >> squareExtent [
+Mf3DEmptySquareElement >> squareExtent [
 
 	^ 200 @ 200
 ]

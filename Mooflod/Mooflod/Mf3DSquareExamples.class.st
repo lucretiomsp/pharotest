@@ -9,6 +9,6 @@ Mf3DSquareExamples class >> exampleSimple3DSquare [
 
 <script>
 |s|
-s:= Mf3DFilledSquareElement new.
+s:= Mf3DEmptySquareElement new.
 s openSquare: s
 ]
