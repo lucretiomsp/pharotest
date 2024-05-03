@@ -1,19 +1,36 @@
 Class {
-	#name : #Mf3DEmptySquareElement,
+	#name : #Mf3DFilledSquareElement,
 	#superclass : #ToElement,
-	#category : #'Mooflod-3DFilledSquare'
+	#instVars : [
+		'currentY',
+		'fill'
+	],
+	#classVars : [
+		'value'
+	],
+	#category : #'Mooflod-3DFilledSquareWidget'
 }
 
+{ #category : #accessing }
+Mf3DFilledSquareElement >> currentY [ 
+^currentY
+]
+
 { #category : #initialization }
-Mf3DEmptySquareElement >> defaultGeometry [ 
+Mf3DFilledSquareElement >> defaultGeometry [ 
 
        ^BlSquareGeometry new
         
       
 ]
 
+{ #category : #accessing }
+Mf3DFilledSquareElement >> fill [ 
+^fill 
+]
+
 { #category : #'initialization - private' }
-Mf3DEmptySquareElement >> initBottomLeft [
+Mf3DFilledSquareElement >> initBottomLeft [
 |bll|
 
 	bll := ToElement new.
@@ -24,7 +41,7 @@ Mf3DEmptySquareElement >> initBottomLeft [
 ]
 
 { #category : #'initialization - private' }
-Mf3DEmptySquareElement >> initBottomRight [
+Mf3DFilledSquareElement >> initBottomRight [
 
 	| brl |
 	brl := ToElement new.
@@ -35,7 +52,15 @@ Mf3DEmptySquareElement >> initBottomRight [
 ]
 
 { #category : #'as yet unclassified' }
-Mf3DEmptySquareElement >> initLines [
+Mf3DFilledSquareElement >> initFill [
+
+	fill := MfFillingLineElement new.
+	fill background: Color red.
+	self addChild: fill
+]
+
+{ #category : #'as yet unclassified' }
+Mf3DFilledSquareElement >> initLines [
 
 	self initBottomLeft .
 	self initBottomLeft .
@@ -45,7 +70,7 @@ Mf3DEmptySquareElement >> initLines [
 ]
 
 { #category : #'initialization - private' }
-Mf3DEmptySquareElement >> initTopLeft [
+Mf3DFilledSquareElement >> initTopLeft [
 
 	| tll |
 	tll := ToElement new.
@@ -56,7 +81,7 @@ Mf3DEmptySquareElement >> initTopLeft [
 ]
 
 { #category : #'initialization - private' }
-Mf3DEmptySquareElement >> initTopRight [
+Mf3DFilledSquareElement >> initTopRight [
 
 	| tlr |
 	tlr := ToElement new.
@@ -67,7 +92,7 @@ Mf3DEmptySquareElement >> initTopRight [
 ]
 
 { #category : #initialization }
-Mf3DEmptySquareElement >> initialize [
+Mf3DFilledSquareElement >> initialize [
 
 	super initialize.
 	self geometry: self defaultGeometry.
@@ -76,17 +101,18 @@ Mf3DEmptySquareElement >> initialize [
 	self effect:
 		(BlSimpleShadowEffect color: Color darkGray offset: 50 @ -50).
 	self layout: BlFrameLayout new.
-
+	self initFill.
+	value := 0
 ]
 
 { #category : #'as yet unclassified' }
-Mf3DEmptySquareElement >> openSquare: aSquare [
+Mf3DFilledSquareElement >> openSquare: aSquare [
 
 	| space |
 	space := BlSpace new.
 	space root layout: BlFlowLayout horizontal.
 
-	space toTheme: Mf3DEmptySquareTheme new.
+	space toTheme: Mf3DSquareTheme new.
 
 	space root addChild: self initBottomRight.
 	space root addChild: self initTopLeft.
@@ -101,8 +127,41 @@ Mf3DEmptySquareElement >> openSquare: aSquare [
 	^ aSquare
 ]
 
+{ #category : #initialization }
+Mf3DFilledSquareElement >> setValue: aValue [
+
+	(aValue between: 0 and: 100) ifTrue: [ self value: aValue ].
+	self updateSquare
+]
+
 { #category : #'as yet unclassified' }
-Mf3DEmptySquareElement >> squareExtent [
+Mf3DFilledSquareElement >> squareExtent [
 
 	^ 200 @ 200
+]
+
+{ #category : #'as yet unclassified' }
+Mf3DFilledSquareElement >> updateFill: anY [
+
+	fill size: 195 @ anY
+]
+
+{ #category : #'as yet unclassified' }
+Mf3DFilledSquareElement >> updateSquare [
+
+	currentY := 0.
+	1 to: value do: [ :i |
+		currentY := currentY + 2.
+		self updateFill: currentY ]
+]
+
+{ #category : #evaluating }
+Mf3DFilledSquareElement >> value [
+^value
+]
+
+{ #category : #accessing }
+Mf3DFilledSquareElement >> value: v [
+
+value:= v
 ]

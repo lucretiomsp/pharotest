@@ -1,11 +1,11 @@
 Class {
-	#name : #Mf3DEmptySquareTheme,
+	#name : #Mf3DSquareTheme,
 	#superclass : #ToRawTheme,
-	#category : #'Mooflod-3DFilledSquare'
+	#category : #'Mooflod-3DFilledSquareWidget'
 }
 
 { #category : #accessing }
-Mf3DEmptySquareTheme class >> defaultTokenProperties [
+Mf3DSquareTheme class >> defaultTokenProperties [
 	"define here token properties of the widget theme"
 
 	^ super defaultTokenProperties
