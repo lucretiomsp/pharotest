@@ -10,5 +10,5 @@ Mf3DFilledSquareTheme class >> defaultTokenProperties [
 
 	^ super defaultTokenProperties
 	  ,
-	  { (ToTokenProperty name: #'background-color' value: Color lightBlue) }
+	  { (ToTokenProperty name: #'background-color' value: Color lightGreen) }
 ]
