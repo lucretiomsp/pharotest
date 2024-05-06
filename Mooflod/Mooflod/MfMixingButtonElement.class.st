@@ -9,6 +9,5 @@ MfMixingButtonElement >> initialize [
 
 	super initialize.
 	self geometry: BlCircleGeometry new.
-	self background: Color lightBlue.
-
+	self background: Color darkGray
 ]

@@ -3,7 +3,8 @@ Class {
 	#superclass : #ToElement,
 	#instVars : [
 		'currentY',
-		'fill'
+		'fill',
+		'left'
 	],
 	#classVars : [
 		'value'
@@ -27,6 +28,31 @@ Mf3DFilledSquareElement >> defaultGeometry [
 { #category : #accessing }
 Mf3DFilledSquareElement >> fill [ 
 ^fill 
+]
+
+{ #category : #'as yet unclassified' }
+Mf3DFilledSquareElement >> fillBehind [
+]
+
+{ #category : #'as yet unclassified' }
+Mf3DFilledSquareElement >> fillLeft [
+
+	"left := MfFillingLineElement new.
+	left size: 50 @ 120.
+	left background: Color pink.
+	left transformDo: [ :d | d rotateBy: 50 ].
+	self addChild: left"
+]
+
+{ #category : #'as yet unclassified' }
+Mf3DFilledSquareElement >> fillRight [
+
+	| fr |
+	fr := MfFillingLineElement new.
+	fr size: 50 @ 80.
+	fr background: Color pink.
+	fr transformDo: [ :d | d rotateBy: 50 ].
+	self addChild: fr
 ]
 
 { #category : #'initialization - private' }
@@ -55,8 +81,11 @@ Mf3DFilledSquareElement >> initBottomRight [
 Mf3DFilledSquareElement >> initFill [
 
 	fill := MfFillingLineElement new.
-	fill background: Color red.
-	self addChild: fill
+	fill background: Color pink.
+	self addChild: fill.
+	"self fillLeft.
+	self fillRight.
+	self fillBehind"
 ]
 
 { #category : #'as yet unclassified' }
@@ -105,6 +134,11 @@ Mf3DFilledSquareElement >> initialize [
 	value := 0
 ]
 
+{ #category : #accessing }
+Mf3DFilledSquareElement >> left [ 
+^left
+]
+
 { #category : #'as yet unclassified' }
 Mf3DFilledSquareElement >> openSquare: aSquare [
 
@@ -117,12 +151,10 @@ Mf3DFilledSquareElement >> openSquare: aSquare [
 	space root addChild: self initBottomRight.
 	space root addChild: self initTopLeft.
 	space root addChild: self initBottomLeft.
-		space root addChild: aSquare.
+	space root addChild: aSquare.
 	space root addChild: self initTopRight.
 	space root childrenDo: [ :s |
 		s transformDo: [ :c | c translateBy: 200 @ 150 ] ].
-
-
 	space show.
 	^ aSquare
 ]

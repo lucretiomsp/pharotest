@@ -26,20 +26,27 @@ MfMixingTableElement >> defaultGeometry [
 
 { #category : #'as yet unclassified' }
 MfMixingTableElement >> initEventListeners [
+	"add the handler that changes color when pressing a key"
 
 	self addEventHandlerOn: BlKeyDownEvent do: [ :anEvent |
 		keymap
 			at: anEvent key name
-			ifPresent: [ :aButton | aButton background: Color random ] ].
+			ifPresent: [ :aButton | aButton background: Color red ] ].
+			self addEventHandlerOn: BlKeyUpEvent do: [ :anEvent |
+		keymap
+			at: anEvent key name
+			ifPresent: [ :aButton | aButton background: Color darkGray ] ].
 	self requestFocus
 ]
 
 { #category : #accessing }
 MfMixingTableElement >> initKeys [
+	"create the keys that will be associated to buttons"
 
 	| keys |
-	keys := #( Q W E R T Y U I O P ). keys do: [ :eachKey |
-		        self addButton: MfMixingButtonElement new key: eachKey ].
+	keys := #( Q W E R T A S D F G ).
+	keys do: [ :eachKey |
+		self addButton: MfMixingButtonElement new key: eachKey ].
 	self initEventListeners
 ]
 
@@ -49,7 +56,7 @@ MfMixingTableElement >> initialize [
 	super initialize.
 	self geometry: self defaultGeometry.
 	self size: self tableExtent.
-	keymap:= Dictionary new.
+	keymap := Dictionary new.
 	self background: Color black.
 	self border: (BlBorder paint: Color blue width: 2).
 	self layout: (BlGridLayout horizontal cellSpacing: 20).
@@ -93,7 +100,7 @@ MfMixingTableElement >> nbButtons: buttons [
 
 { #category : #'as yet unclassified' }
 MfMixingTableElement >> openMixingTable: aTable [
-
+"create a space to display the mixing table widget"
 	| space |
 	space := BlSpace new.
 	space root layout: BlFlowLayout horizontal.
