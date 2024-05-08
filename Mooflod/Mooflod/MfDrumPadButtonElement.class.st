@@ -1,11 +1,11 @@
 Class {
-	#name : #MfMixingButtonElement,
+	#name : #MfDrumPadButtonElement,
 	#superclass : #ToElement,
-	#category : #'Mooflod-MixingTableWidget'
+	#category : #'Mooflod-DrumPadWidget'
 }
 
 { #category : #initialization }
-MfMixingButtonElement >> initialize [
+MfDrumPadButtonElement >> initialize [
 
 	super initialize.
 	self geometry: BlCircleGeometry new.

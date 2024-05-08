@@ -1,16 +1,16 @@
 Class {
-	#name : #MfMixingTableElement,
+	#name : #MfDrumPadsElement,
 	#superclass : #ToElement,
 	#classVars : [
 		'keymap',
 		'nbButtonPerRow',
 		'nbButtons'
 	],
-	#category : #'Mooflod-MixingTableWidget'
+	#category : #'Mooflod-DrumPadWidget'
 }
 
 { #category : #adding }
-MfMixingTableElement >> addButton: anElement key: aKey [
+MfDrumPadsElement >> addButton: anElement key: aKey [
 	"add the key passed as parameter to the key dictionnary"
 
 	keymap at: aKey put: anElement.
@@ -19,13 +19,13 @@ MfMixingTableElement >> addButton: anElement key: aKey [
 ]
 
 { #category : #initialization }
-MfMixingTableElement >> defaultGeometry [
+MfDrumPadsElement >> defaultGeometry [
 ^ BlRectangleGeometry new
 	
 ]
 
 { #category : #'as yet unclassified' }
-MfMixingTableElement >> initEventListeners [
+MfDrumPadsElement >> initEventListeners [
 
 	self addEventHandlerOn: BlKeyDownEvent do: [ :anEvent |
 		keymap
@@ -35,16 +35,16 @@ MfMixingTableElement >> initEventListeners [
 ]
 
 { #category : #accessing }
-MfMixingTableElement >> initKeys [
+MfDrumPadsElement >> initKeys [
 
 	| keys |
 	keys := #( Q W E R T Y U I O P ). keys do: [ :eachKey |
-		        self addButton: MfMixingButtonElement new key: eachKey ].
+		        self addButton: MfDrumPadButtonElement new key: eachKey ].
 	self initEventListeners
 ]
 
 { #category : #initialization }
-MfMixingTableElement >> initialize [
+MfDrumPadsElement >> initialize [
 
 	super initialize.
 	self geometry: self defaultGeometry.
@@ -59,54 +59,54 @@ MfMixingTableElement >> initialize [
 ]
 
 { #category : #accessing }
-MfMixingTableElement >> keymap [
+MfDrumPadsElement >> keymap [
 
 
 ^keymap
 ]
 
 { #category : #'as yet unclassified' }
-MfMixingTableElement >> nbButtonPerRow [
+MfDrumPadsElement >> nbButtonPerRow [
 
 	^ nbButtonPerRow 
 ]
 
 { #category : #'as yet unclassified' }
-MfMixingTableElement >> nbButtonPerRow: rows [
+MfDrumPadsElement >> nbButtonPerRow: rows [
 
 	nbButtonPerRow  := rows.
 	self layout columnCount: nbButtonPerRow 
 ]
 
 { #category : #'as yet unclassified' }
-MfMixingTableElement >> nbButtons [
+MfDrumPadsElement >> nbButtons [
 
 ^nbButtons 
 ]
 
 { #category : #'as yet unclassified' }
-MfMixingTableElement >> nbButtons: buttons [
+MfDrumPadsElement >> nbButtons: buttons [
 
 	nbButtons := buttons.
 	self initKeys
 ]
 
 { #category : #'as yet unclassified' }
-MfMixingTableElement >> openMixingTable: aTable [
+MfDrumPadsElement >> openMixingTable: aTable [
 
 	| space |
 	space := BlSpace new.
 	space root layout: BlFlowLayout horizontal.
 	aTable transformDo: [ :c | c translateBy: 180 @ 150 ].
 	space root addChild: aTable.
-	space toTheme: MfMixingTableTheme new.
+	space toTheme: MfDrumPadTheme new.
 	space applyAllSkinInstallers.
 	space show.
 	^ aTable
 ]
 
 { #category : #'as yet unclassified' }
-MfMixingTableElement >> redefineKeys: keys [
+MfDrumPadsElement >> redefineKeys: keys [
 
 	| v |
 	v := keymap values.
@@ -119,7 +119,7 @@ MfMixingTableElement >> redefineKeys: keys [
 ]
 
 { #category : #'as yet unclassified' }
-MfMixingTableElement >> tableExtent [
+MfDrumPadsElement >> tableExtent [
 
 	^ 400 @ 200
 ]

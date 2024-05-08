@@ -51,6 +51,23 @@ MfPatternElement >> backgroundPaint [
 	^ Color red
 ]
 
+{ #category : #api }
+MfPatternElement >> display: aCollection [
+	"display aCollection of 1 and 0, where 1 are black are steps and 0 are white steps - in the tradition of mmusic step sequencers"
+
+	| patternElem stepColor |
+	patternElem := self
+		               min: 4;
+		               max: 64;
+		               nbsteps: aCollection size.
+	1 to: aCollection size do: [ :i |
+		(aCollection at: i) = 0
+			ifTrue: [ stepColor := Color white ]
+			ifFalse: [ stepColor := Color black ].
+
+		(children at: i) background: stepColor ]
+]
+
 { #category : #initialization }
 MfPatternElement >> initialize [
 
@@ -121,12 +138,12 @@ MfPatternElement >> newRawSkin [
 MfPatternElement >> openPattern: aPattern [
 
 	| space |
-	space := BlSpace new.
+	space := BlSpace new extent: 450@100.
 	space root layout: BlFlowLayout horizontal.
-	aPattern transformDo: [ :c | c translateBy: 180 @ 200 ].
+	aPattern transformDo: [ :c | c translateBy: 10 @ 20 ].
 	space root addChild: aPattern.
 	space toTheme: MfPatternElementTheme new.
-	space applyAllSkinInstallers .
+	space applyAllSkinInstallers.
 	space show.
 	^ aPattern
 ]

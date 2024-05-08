@@ -1,15 +1,15 @@
 Class {
-	#name : #MfMixingTableExamples,
+	#name : #MfDrumPadsExamples,
 	#superclass : #Object,
-	#category : #'Mooflod-MixingTableWidget'
+	#category : #'Mooflod-DrumPadWidget'
 }
 
 { #category : #'as yet unclassified' }
-MfMixingTableExamples class >> exampleSimpleMixingTable [
+MfDrumPadsExamples class >> exampleSimpleMixingTable [
 
 	<script>
 	| t |
-	t := MfMixingTableElement new
+	t := MfDrumPadsElement new
 		     nbButtons: 10;
 		     nbButtonPerRow: 5.
 	t openMixingTable: t

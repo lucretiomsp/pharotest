@@ -1,11 +1,11 @@
 Class {
-	#name : #MfMixingTableTheme,
+	#name : #MfDrumPadTheme,
 	#superclass : #ToRawTheme,
-	#category : #'Mooflod-MixingTableWidget'
+	#category : #'Mooflod-DrumPadWidget'
 }
 
 { #category : #accessing }
-MfMixingTableTheme class >> defaultTokenProperties [
+MfDrumPadTheme class >> defaultTokenProperties [
 	"define here token properties of the widget theme"
 
 	^ super defaultTokenProperties

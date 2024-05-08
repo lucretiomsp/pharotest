@@ -4,6 +4,21 @@ Class {
 	#category : #'Mooflod-PatternWidget'
 }
 
+{ #category : #'test-init' }
+MfPatternElementTest >> testDisplayArray [
+
+	| patternElem steps |
+	"display an array in the pattrn, where 1 are black steps and 0 are white steps"
+	patternElem := MfPatternElement new display: #( 1 0 0 1 ).
+	steps := patternElem children.
+
+	self assert: (steps at: 1) background paint color equals: Color black.
+	self assert: (steps at: 2) background paint color equals: Color white.
+	self assert: (steps at: 3) background paint color equals: Color white.
+	self assert: (steps at: 4) background paint color equals: Color black.
+
+]
+
 { #category : #tests }
 MfPatternElementTest >> testIfInstrumentAssignedOnClick [
 
